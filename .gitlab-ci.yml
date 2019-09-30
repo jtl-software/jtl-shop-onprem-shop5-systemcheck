@@ -178,7 +178,7 @@ deploy:
     - dockerLogin
   script:
     - deployProcess
-    - buildscript pipeline:build tool $CI_PROJECT_NAME $CI_PROJECT_DIR $CI_COMMIT_REF_NAME $CI_COMMIT_SHA shop4-systemcheck
+    - buildscript pipeline:build tool $CI_PROJECT_NAME $CI_PROJECT_DIR $CI_COMMIT_REF_NAME $CI_COMMIT_SHA shop5-systemcheck
   after_script:
     - *postBuildDeployScripts
     - dockerLogout
