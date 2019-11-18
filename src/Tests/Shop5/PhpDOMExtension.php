@@ -14,7 +14,7 @@ use Systemcheck\Tests\PhpModuleTest;
  */
 class PhpDOMExtension extends PhpModuleTest
 {
-    protected $name          = 'DOM-Unterstützung';
+    protected $name          = 'DOM';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-dom</code>.';
     protected $isOptional    = false;

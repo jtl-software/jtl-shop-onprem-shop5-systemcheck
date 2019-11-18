@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpMbstringExtension extends PhpModuleTest
 {
-    protected $name          = 'mbstring-Unterstützung';
+    protected $name          = 'mbstring';
     protected $requiredState = 'enabled';
     protected $description   = 'Die <code>mbstring</code>-Erweiterung ist zum Betrieb des JTL-Shop zwingend erforderlich.';
     protected $isOptional    = false;

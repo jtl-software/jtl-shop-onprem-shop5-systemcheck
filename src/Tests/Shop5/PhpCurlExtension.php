@@ -14,7 +14,7 @@ use Systemcheck\Tests\PhpModuleTest;
  */
 class PhpCurlExtension extends PhpModuleTest
 {
-    protected $name          = 'cURL-Unterstützung';
+    protected $name          = 'cURL';
     protected $requiredState = 'enabled';
     protected $description   = '';
     protected $isOptional    = true;

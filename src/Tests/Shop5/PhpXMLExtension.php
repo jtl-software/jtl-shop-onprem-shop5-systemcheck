@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpXMLExtension extends PhpModuleTest
 {
-    protected $name          = 'XML-Unterstützung';
+    protected $name          = 'XML';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-xml</code>.';
     protected $isOptional    = false;

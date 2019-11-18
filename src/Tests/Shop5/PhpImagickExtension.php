@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpImagickExtension extends PhpModuleTest
 {
-    protected $name          = 'ImageMagick-Unterstützung';
+    protected $name          = 'ImageMagick';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-imagick</code> 
 für die dynamische Generierung von Bildern.<br>Diese Erweiterung ist auf Debian-Systemen als 

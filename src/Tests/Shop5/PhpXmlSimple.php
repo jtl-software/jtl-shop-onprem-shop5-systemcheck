@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpXmlSimple extends PhpModuleTest
 {
-    protected $name          = 'SimpleXML-Unterstützung';
+    protected $name          = 'SimpleXML';
     protected $requiredState = 'enabled';
     protected $description   = 'Für JTL-Shop wird die PHP-Erweiterung Simple-XML benötigt.';
     protected $isOptional    = false;

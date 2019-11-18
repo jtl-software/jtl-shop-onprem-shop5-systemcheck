@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpIconvExtension extends PhpModuleTest
 {
-    protected $name          = 'Iconv-Unterstützung';
+    protected $name          = 'Iconv';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-iconv</code> für die Internationalisierung.';
     protected $isOptional    = false;

@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpGdExtension extends PhpModuleTest
 {
-    protected $name            = 'GD-Unterstützung';
+    protected $name            = 'GD';
     protected $requiredState   = 'enabled';
     protected $description     = '';
     protected $isOptional      = false;

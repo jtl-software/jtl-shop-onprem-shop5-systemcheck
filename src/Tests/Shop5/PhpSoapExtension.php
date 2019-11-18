@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpSoapExtension extends PhpModuleTest
 {
-    protected $name          = 'SOAP-Unterstützung';
+    protected $name          = 'SOAP';
     protected $requiredState = 'enabled';
     protected $description   = 'Die Prüfung der Umsatzsteuer-ID erfolgt per "MwSt-Informationsaustauschsystem (MIAS) ' .
         'der Europäischen Kommission".<br> Dieses System wird mit dem Übertragungsprotokoll "SOAP" abgefragt, was ' .

@@ -16,7 +16,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpPdoMysqlSupport extends PhpModuleTest
 {
-    protected $name          = 'PDO::MySQL - Unterstützung';
+    protected $name          = 'PDO::MySQL';
     protected $requiredState = 'enabled';
     protected $description   = 'Für JTL-Shop wird die Unterstützung für PHP-Data-Objects ' .
     '(<code>php-pdo</code> und <code>php-mysql</code>) benötigt.';

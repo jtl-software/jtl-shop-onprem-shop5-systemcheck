@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpBCMathExtension extends PhpModuleTest
 {
-    protected $name          = 'BCMath-Unterstützung';
+    protected $name          = 'BCMath';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-bcmath</code> für diverse Berechnungen.';
     protected $isOptional    = false;

@@ -16,7 +16,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpSplSupport extends PhpModuleTest
 {
-    protected $name          = 'PHP-SPL-Unterstützung';
+    protected $name          = 'Standard PHP Library';
     protected $requiredState = 'enabled';
     protected $description   = 'Für JTL-Shop5 wird Unterstützung für die Standard PHP Library (SPL) benötigt.';
     protected $isOptional    = false;

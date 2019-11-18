@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpJsonExtension extends PhpModuleTest
 {
-    protected $name          = 'JSON-Unterstützung';
+    protected $name          = 'JSON';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt PHP-Unterstützung für das JSON-Format.';
     protected $isOptional    = false;

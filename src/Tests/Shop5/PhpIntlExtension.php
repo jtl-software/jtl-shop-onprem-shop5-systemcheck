@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpIntlExtension extends PhpModuleTest
 {
-    protected $name          = 'Internationalisierungs-Unterstützung';
+    protected $name          = 'Intl';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-intl</code> für die Internationalisierung.';
     protected $isOptional    = false;

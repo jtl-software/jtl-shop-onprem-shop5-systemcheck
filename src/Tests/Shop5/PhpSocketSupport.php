@@ -15,7 +15,7 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpSocketSupport extends PhpModuleTest
 {
-    protected $name          = 'Socket-Unterstützung';
+    protected $name          = 'Sockets';
     protected $requiredState = 'enabled';
     protected $description   = '';
     protected $isOptional    = true;
