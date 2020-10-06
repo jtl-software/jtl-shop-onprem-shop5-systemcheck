@@ -104,7 +104,6 @@ class Filesystem
     , 'media/image/storage/variations'
     , 'admin/templates_c'
     , 'admin/includes/emailpdfs'
-    , 'includes/config.JTL-Shop.ini.php'
     );
 
     /**
