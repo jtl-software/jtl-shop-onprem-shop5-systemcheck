@@ -102,6 +102,7 @@ class Filesystem
     , 'media/image/storage/manufacturers'
     , 'media/image/storage/opc'
     , 'media/image/storage/variations'
+    , 'media/image/storage/videothumbs'
     , 'admin/templates_c'
     , 'admin/includes/emailpdfs'
     );
