@@ -26,6 +26,12 @@ class PhpIntlExtension extends PhpModuleTest
      */
     public function execute(): bool
     {
-        return \extension_loaded('intl');
+        if (\extension_loaded('intl')) {
+            if (defined('INTL_IDNA_VARIANT_UTS46')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
