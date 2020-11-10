@@ -162,16 +162,17 @@ class Filesystem
             if (\is_array($current) && count($current) > 0) {
                 foreach ($current as $item) {
                     $folders[$item] = false;
-                    if (\is_writable(PFAD_ROOT . $item)) {
+                    $abs            = \PFAD_ROOT . $item;
+                    if (\is_writable($abs)) {
                         // if entity (implicitly exists and) is writable
                         $folders[$item] = true;
-                    } elseif (!\is_file(PFAD_ROOT . $item)) {
+                    } elseif (!\is_file($abs)) {
                         // if entity is not a file (implicitly not exists) try to write/create, and return the result
-                        $writable       = (@\file_put_contents(PFAD_ROOT . $item, ' ') === 1);
+                        $writable       = (@\file_put_contents($abs, ' ') === 1);
                         $folders[$item] = $writable;
-                        // cleanup, if anything was written
+                        // cleanup if anything was written
                         if ($writable === true) {
-                            \unlink(PFAD_ROOT . $item);
+                            \unlink($abs);
                         }
                     }
                 }
