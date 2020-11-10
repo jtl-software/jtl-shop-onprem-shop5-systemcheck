@@ -1,8 +1,4 @@
 <?php declare(strict_types=1);
-/**
- * @copyright JTL-Software-GmbH
- * @package jtl\Systemcheck\Shop4
- */
 
 namespace Systemcheck\Platform;
 
@@ -56,7 +52,16 @@ class Hosting
     /**
      * @var string
      */
-    protected $provider = null;
+    protected $provider;
+
+    /**
+     * Hosting constructor.
+     */
+    public function __construct()
+    {
+        $this->documentRoot = $_SERVER['DOCUMENT_ROOT'];
+        $this->detect();
+    }
 
     /**
      * @return string
@@ -88,15 +93,6 @@ class Hosting
     public function getPhpVersion(): string
     {
         return \PHP_VERSION;
-    }
-
-    /**
-     * __construct
-     */
-    public function __construct()
-    {
-        $this->documentRoot = $_SERVER['DOCUMENT_ROOT'];
-        $this->detect();
     }
 
     /**
