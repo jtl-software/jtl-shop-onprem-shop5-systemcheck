@@ -1,8 +1,4 @@
 <?php declare(strict_types=1);
-/**
- * @package jtl\Systemcheck\Shop4
- * @copyright JTL-Software-GmbH
- */
 
 namespace Systemcheck\Platform;
 
@@ -45,10 +41,8 @@ class Filesystem
     /**
      * @var array
      */
-    protected $writableEntities = array(
-        // Folders
-        'bilder/intern/trustedshops'
-    , 'bilder/news'
+    protected $writableEntities = [
+    'bilder/news'
     , 'bilder/intern/shoplogo'
     , 'mediafiles/Bilder'
     , 'mediafiles/Musik'
@@ -89,6 +83,7 @@ class Filesystem
     , 'media/image/category'
     , 'media/image/characteristic'
     , 'media/image/characteristicvalue'
+    , 'media/image/configgroup'
     , 'media/image/manufacturer'
     , 'media/image/news'
     , 'media/image/newscategory'
@@ -103,9 +98,11 @@ class Filesystem
     , 'media/image/storage/opc'
     , 'media/image/storage/variations'
     , 'media/image/storage/videothumbs'
+    , 'media/image/variation'
+    , 'media/video'
     , 'admin/templates_c'
     , 'admin/includes/emailpdfs'
-    );
+    ];
 
     /**
      * Constructor of the file-check-object

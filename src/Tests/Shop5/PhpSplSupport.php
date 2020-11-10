@@ -1,9 +1,4 @@
 <?php declare(strict_types=1);
-/**
- * @copyright 2010-2014 JTL-Software-GmbH
- * @author Christian Spoo <christian.spoo@jtl-software.com>
- * @package jtl\Systemcheck\Shop5
- */
 
 namespace Systemcheck\Tests\Shop5;
 

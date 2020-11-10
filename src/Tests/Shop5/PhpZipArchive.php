@@ -1,8 +1,4 @@
 <?php declare(strict_types=1);
-/**
- * @copyright JTL-Software-GmbH
- * @package jtl\Systemcheck\Shop5
- */
 
 namespace Systemcheck\Tests\Shop5;
 
