@@ -12,8 +12,8 @@ $tests        = $systemcheck->executeTestGroup('Shop5');
 $platform     = new Hosting();
 
 header('Content-Type: text/html; charset=utf-8');
-echo $twig->render('systemcheck.html.twig', array(
+echo $twig->render('systemcheck.html.twig', [
     'passed'   => $systemcheck->getIsPassed(),
     'tests'    => $tests,
     'platform' => $platform
-));
+]);
