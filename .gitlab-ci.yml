@@ -1,7 +1,7 @@
 variables:
   DEPLOY_TYPE: "tool"
   ZIP_FILE_NAME_PREFIX: "shop5-systemcheck"
-  JTL_FOLDER_NAME: "shop5-systemcheck"
+  JTL_FOLDER_NAME: "systemcheck"
   ZIP_FILE_TARGET_FOLDER: "tools"
   # !------------ Do not alter after this point! ----------!
   PLUGIN_CI_IMAGE_NAME: "registry.gitlab.com/jtl-software/jtl-shop/core/ci-plugins"
