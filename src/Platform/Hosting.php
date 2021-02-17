@@ -59,7 +59,7 @@ class Hosting
      */
     public function __construct()
     {
-        $this->documentRoot = $_SERVER['DOCUMENT_ROOT'];
+        $this->documentRoot = $_SERVER['DOCUMENT_ROOT'] ?? '?';
         $this->detect();
     }
 
@@ -100,23 +100,20 @@ class Hosting
      */
     private function detect(): void
     {
-        $hostname = \gethostbyaddr($_SERVER['SERVER_ADDR']);
-
-        if (\preg_match('/jtl-software\.de$/', $hostname)) {
+        $this->hostname = \gethostbyaddr($_SERVER['SERVER_ADDR'] ?? '127.0.0.1');
+        if (\preg_match('/jtl-software\.de$/', $this->hostname)) {
             $this->provider = self::PROVIDER_JTL;
-        } elseif (\preg_match('/hosteurope\.de$/', $hostname)) {
+        } elseif (\preg_match('/hosteurope\.de$/', $this->hostname)) {
             $this->provider = self::PROVIDER_HOSTEUROPE;
-        } elseif (\preg_match('/your-server\.de$/', $hostname)) {
+        } elseif (\preg_match('/your-server\.de$/', $this->hostname)) {
             $this->provider = self::PROVIDER_HETZNER;
-        } elseif (\preg_match('/kundenserver\.de$/', $hostname)) {
+        } elseif (\preg_match('/kundenserver\.de$/', $this->hostname)) {
             $this->provider = self::PROVIDER_1UND1;
-        } elseif (\preg_match('/stratoserver\.net$/', $hostname)) {
+        } elseif (\preg_match('/stratoserver\.net$/', $this->hostname)) {
             $this->provider = self::PROVIDER_STRATO;
-        } elseif (\preg_match('/alfahosting-server\.de$/', $hostname)) {
+        } elseif (\preg_match('/alfahosting-server\.de$/', $this->hostname)) {
             $this->provider = self::PROVIDER_ALFAHOSTING;
         }
-
-        $this->hostname = $hostname;
     }
 
 }
