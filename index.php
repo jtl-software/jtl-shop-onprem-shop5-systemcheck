@@ -4,6 +4,8 @@ use Systemcheck\Environment;
 use Systemcheck\Platform\Hosting;
 
 require __DIR__ . '/vendor/autoload.php';
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 /**
  * @param array                    $params
