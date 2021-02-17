@@ -78,33 +78,12 @@
             </div>
         </div>
         <div class="form-group">
+            {$docRoot = $platform->getDocumentRoot()}
             <label class="col-sm-2 control-label">Document Root:</label>
             <div class="col-sm-10">
-                <p class="form-control-static">{$platform->getDocumentRoot()}</p>
+                <p class="form-control-static">{if $docRoot === '?'}<em>unbekannt</em>{else}{$docRoot}{/if}</p>
             </div>
         </div>
-        {if $platform->getProvider() === 'hosteurope' || $platform->getProvider() === 'strato' || $platform->getProvider() === '1und1'}
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Hinweise:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static">
-                        {if $platform->getProvider() === 'hosteurope'}
-                            Sie können die PHP-Einstellungen im <a href="https://kis.hosteurope.de/">HostEurope-KIS</a> (<a href="https://kis.hosteurope.de/">https://kis.hosteurope.de/</a>) anpassen.
-                        {elseif $platform->getProvider() === 'strato'}
-                            Bitte laden Sie <a href="http://www.ioncube.com/loaders.php">hier</a> den ionCube-Loader herunter und entpacken Sie das Archiv nach {$platform->getDocumentRoot()} auf dem Server.<br>
-                            Erstellen Sie auf dem Server eine Datei <code>php.ini</code> mit dem folgenden Inhalt:<br><br>
-                    <pre>[Zend]
-zend_extension = {$platform->getDocumentRoot()}/ioncube/ioncube_loader_lin_{$platform->getPhpVersion()|substr:0:3}.so</pre>
-                    {elseif $platform->getProvider() === '1und1'}
-                        Bitte laden Sie <a href="http://www.ioncube.com/loaders.php">hier</a> den ionCube-Loader herunter und entpacken Sie das Archiv nach {$platform->getDocumentRoot()} auf dem Server.<br>
-                        Erstellen Sie auf dem Server eine Datei <code>php.ini</code> mit dem folgenden Inhalt:<br><br>
-                    <pre>[Zend]
-zend_extension = {$platform->getDocumentRoot()}/ioncube/ioncube_loader_lin_{$platform->getPhpVersion()|substr:0:3}.so</pre>
-                    {/if}
-                    </p>
-                </div>
-            </div>
-        {/if}
     </div>
 
     {if $tests.programs|count > 0}
