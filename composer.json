@@ -1,7 +1,7 @@
 {
     "name": "jtlshop/shop5-systemcheck",
     "description": "Shop5 Systemcheck",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "keywords": ["jtl", "jtl-shop"],
     "homepage": "https://www.jtl-software.de/",
     "type": "library",
@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.3",
         "smarty/smarty": "~3.1"
     },
     "autoload": {
