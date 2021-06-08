@@ -24,10 +24,14 @@ $tests        = $systemcheck->executeTestGroup('Shop5');
 $platform     = new Hosting();
 
 header('Content-Type: text/html; charset=utf-8');
-$smarty->assign('passed', $systemcheck->getIsPassed())
-    ->assign('tests', $tests)
-    ->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getResults', 'getResults')
-    ->assign('platform', $platform)
-    ->setCacheDir($templatePath)
-    ->setCompileDir($templatePath)
-    ->display('systemcheck.tpl');
+try {
+    $smarty->assign('passed', $systemcheck->getIsPassed())
+        ->assign('tests', $tests)
+        ->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getResults', 'getResults')
+        ->assign('platform', $platform)
+        ->setCacheDir($templatePath)
+        ->setCompileDir($templatePath)
+        ->display('systemcheck.tpl');
+} catch (\Exception $e) {
+    echo \get_class($e). ': ' . $e->getMessage();
+}
