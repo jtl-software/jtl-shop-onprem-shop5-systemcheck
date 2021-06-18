@@ -102,6 +102,7 @@ class Filesystem
     , 'media/video'
     , 'admin/templates_c'
     , 'admin/includes/emailpdfs'
+    , 'plugins'
     ];
 
     /**
