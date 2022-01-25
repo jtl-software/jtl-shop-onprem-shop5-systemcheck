@@ -111,7 +111,7 @@ abstract class AbstractTest implements JsonSerializable
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getRunStandAlone()
     {
@@ -142,9 +142,9 @@ abstract class AbstractTest implements JsonSerializable
     abstract public function execute(): bool;
 
     /**
-     * @return array|mixed
+     * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return \get_object_vars($this);
     }
