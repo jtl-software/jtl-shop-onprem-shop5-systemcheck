@@ -13,7 +13,7 @@ class PhpAllowUrlFopen extends PhpConfigTest
 {
     protected $name          = 'allow_url_fopen';
     protected $requiredState = 'on';
-    protected $description   = '';
+    protected $description   = 'Wird benötigt um externe URL\'s zu laden (optional)';
     protected $isOptional    = true;
     protected $isRecommended = true;
 

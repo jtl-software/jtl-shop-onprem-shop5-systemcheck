@@ -12,7 +12,7 @@ class PhpCurlExtension extends PhpModuleTest
 {
     protected $name          = 'cURL';
     protected $requiredState = 'enabled';
-    protected $description   = '';
+    protected $description   = 'Wird benötigt um Webrequests zu verarbeiten (optional)';
     protected $isOptional    = true;
     protected $isRecommended = true;
 
