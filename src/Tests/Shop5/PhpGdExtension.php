@@ -13,7 +13,7 @@ class PhpGdExtension extends PhpModuleTest
 {
     protected $name            = 'GD';
     protected $requiredState   = 'enabled';
-    protected $description     = 'Wird zur Bildbearbeitung und Verarbeitung benötigt.';
+    protected $description     = 'Wird zur Bildbe- und Verarbeitung benötigt.';
     protected $isOptional      = false;
     protected $isRecommended   = false;
     protected $isReplaceableBy = PhpImagickExtension::class;
