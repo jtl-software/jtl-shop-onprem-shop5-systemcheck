@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=7.3",
-        "smarty/smarty": "~3.1"
+        "smarty/smarty": "^4.0"
     },
     "autoload": {
         "psr-4": { "Systemcheck\\": "src" }
