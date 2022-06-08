@@ -20,14 +20,14 @@ stages:
     echo ""
   }
   function buildProcess() {
-    echo "Building projekt in PHP 7.2 docker image..."
+    echo "Building projekt in PHP 8.1 docker image..."
 
     docker run \
       -dit \
       --volume $CI_PROJECT_DIR.tmp/CI_SERVER_TLS_CA_FILE:$CI_PROJECT_DIR.tmp/CI_SERVER_TLS_CA_FILE \
       --volume $(pwd):/dockerBuild \
       --name="$CI_CONTAINER_NAME" \
-      $PLUGIN_CI_IMAGE_NAME:php73
+      $PLUGIN_CI_IMAGE_NAME:php81
 
     BUILD_SCRIPT="#!/usr/bin/env bash \
 
