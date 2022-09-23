@@ -12,7 +12,7 @@ use Systemcheck\Tests\AbstractTest;
 class PhpVersion extends ProgramTest
 {
     protected $name          = 'PHP-Version';
-    protected $requiredState = '7.3.0 - 8.0.x';
+    protected $requiredState = '>8.0.0';
     protected $description   = '';
     protected $isOptional    = false;
     protected $isRecommended = false;
@@ -22,9 +22,8 @@ class PhpVersion extends ProgramTest
      */
     public function execute(): bool
     {
-        $version            = \PHP_VERSION;
-        $this->currentState = $version;
+        $this->currentState = \PHP_VERSION;
 
-        return \version_compare($version, '7.3.0', '>=') && \version_compare($version, '8.1.0', '<');
+        return \version_compare($this->currentState, '8.0.0', '>=');
     }
 }
