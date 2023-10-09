@@ -31,9 +31,11 @@ stages:
 
     BUILD_SCRIPT="#!/usr/bin/env bash \
 
-      if [[ -e composer.json ]]; then \
+      if [ -f "$PLUGIN_DOCKER_WORKING_DIR/composer.json" ]; then \
         echo '] composer start..'; \
         composer install --no-dev -q -d ${PLUGIN_DOCKER_WORKING_DIR}; \
+      else
+        echo '] composer.json not found..'; \
       fi; \
     "
 
