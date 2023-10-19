@@ -52,7 +52,6 @@ class PhpDBVersion extends ProgramTest
         switch ($version->isSupportedVersion()) {
             case DBServerInfo::MIN_SUPPORTED:
                 $this->isOptional    = true;
-                $this->isRecommended = true;
                 $this->description   = 'Für JTL-Shop wird ' . $version->getServer()
                     . ' ab Version ' . $version->getRecommendedVersion() . ' empfohlen.';
 

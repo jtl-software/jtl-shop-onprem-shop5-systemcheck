@@ -61,8 +61,7 @@ class PhpDBConnection extends ProgramTest
     private function handleNotSupported(): bool
     {
         $this->requireAuth   = false;
-        $this->isOptional    = true;
-        $this->isRecommended = false;
+        $this->isOptional    = false;
         $this->currentState  = 'nicht unterstützt';
 
         return false;
