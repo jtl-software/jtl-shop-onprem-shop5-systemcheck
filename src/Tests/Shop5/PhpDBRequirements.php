@@ -2,7 +2,7 @@
 
 namespace Systemcheck\Tests\Shop5;
 
-use Systemcheck\Platform\MySQLVersion;
+use Systemcheck\Platform\DBServerInfo;
 use Systemcheck\Platform\PDOConnection;
 use Systemcheck\Tests\ProgramTest;
 
@@ -41,7 +41,7 @@ class PhpDBRequirements extends ProgramTest
             return $this->handleNotSupported();
         }
 
-        $version       = new MySQLVersion($pdoDB);
+        $version       = new DBServerInfo($pdoDB);
         $utf8Support   = $version->hasUTF8Support();
         $innoDBSupport = $version->hasInnoDBSupport();
 

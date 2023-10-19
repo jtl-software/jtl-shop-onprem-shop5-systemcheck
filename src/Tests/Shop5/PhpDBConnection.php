@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use PDO;
-use Systemcheck\Platform\MySQLVersion;
+use Systemcheck\Platform\DBServerInfo;
 use Systemcheck\Platform\PDOConnection;
 use Systemcheck\Tests\ProgramTest;
 
@@ -37,10 +37,10 @@ class PhpDBConnection extends ProgramTest
             return false;
         }
 
-        $version            = new MySQLVersion($pdoDB);
+        $version            = new DBServerInfo($pdoDB);
         $this->currentState = $version->getServer();
 
-        return $version->isShopSupported(false) >= MySQLVersion::MIN_SUPPORTED;
+        return $version->isSupportedServer();
     }
 
     /**

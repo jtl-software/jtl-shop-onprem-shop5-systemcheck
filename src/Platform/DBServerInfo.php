@@ -6,10 +6,10 @@ use Exception;
 use PDO;
 
 /**
- * Class MySQLVersion
+ * Class DBServerInfo
  * @package JTL\DB
  */
-final class MySQLVersion
+final class DBServerInfo
 {
     public const SERVER_MYSQL   = 'MySQL';
     public const SERVER_MARIADB = 'MariaDB';
@@ -50,8 +50,10 @@ final class MySQLVersion
     /** @var bool|null */
     private ?bool $utf8Support = null;
 
+    private ?int $innoDBSize = null;
+
     /**
-     * MySQLVersion constructor
+     * DBServerInfo constructor
      * @param PDO $pdoDb
      */
     public function __construct(PDO $pdoDb)
@@ -103,23 +105,25 @@ final class MySQLVersion
     }
 
     /**
-     * @param bool $strict
+     * @return bool
+     */
+    public function isSupportedServer(): bool
+    {
+        return \in_array($this->getServer(), [self::SERVER_MYSQL, self::SERVER_MARIADB]);
+    }
+
+    /**
      * @return int
      */
-    public function isShopSupported(bool $strict = true): int
+    public function isSupportedVersion(): int
     {
-        if ($strict === false) {
-            return \in_array($this->getServer(), [self::SERVER_MYSQL, self::SERVER_MARIADB])
-                ? self::SUPPORTED
-                : self::NOT_SUPPORTED;
-        }
-
         $version = $this->getVersion();
         if (\version_compare($version, $this->getMinSupportedVersion(), '>=')
             && \version_compare($version, $this->getRecommendedVersion(), '<')
         ) {
             return self::MIN_SUPPORTED;
         }
+
         if (\version_compare($version, $this->getRecommendedVersion(), '>=')
             && ($this->getMaxSupportedVersion() === null
                 || \version_compare($version, $this->getMaxSupportedVersion(), '<'))
@@ -146,10 +150,25 @@ final class MySQLVersion
                     FROM information_schema.ENGINES
                     WHERE `ENGINE` = 'InnoDB'"
             );
-            if ($res->execute() === false) {
+            if ($res->execute() === false || !($support = $res->fetchObject())) {
                 return false;
             }
-            $this->innoDBSupport = \in_array($res->fetchObject()->SUPPORT ?? 'NONE', ['YES', 'DEFAULT'], true);
+
+            $this->innoDBSupport = \in_array($support->SUPPORT ?? 'NONE', ['YES', 'DEFAULT'], true);
+            if ($this->innoDBSupport === false || $this->getServer() !== self::SERVER_MYSQL) {
+                return $this->innoDBSupport;
+            }
+
+            $this->innoDBSupport = null;
+
+            $res = $this->pdoDb->prepare(
+                "SHOW VARIABLES LIKE 'innodb_version'"
+            );
+            if ($res->execute() === false || !($version = $res->fetchObject())) {
+                return false;
+            }
+
+            $this->innoDBSupport = \version_compare($version->Value, '5.6.0', '>=');
         } catch (Exception) {
             return false;
         }
@@ -173,10 +192,11 @@ final class MySQLVersion
                     FROM information_schema.COLLATIONS
                     WHERE `COLLATION_NAME` RLIKE 'utf8(mb4)?_unicode_ci'"
             );
-            if ($res->execute() === false) {
+            if ($res->execute() === false || !($utf8 = $res->fetchObject())) {
                 return false;
             }
-            $this->utf8Support = \strcasecmp($res->fetchObject()->IS_COMPILED ?? 'no', 'yes') === 0;
+
+            $this->utf8Support = \strcasecmp($utf8->IS_COMPILED ?? 'no', 'yes') === 0;
         } catch (Exception) {
             return false;
         }
@@ -209,5 +229,44 @@ final class MySQLVersion
     public function getMaxSupportedVersion(?string $server = null): ?string
     {
         return self::MAX_VERSION[$server ?? $this->getServer()] ?? null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInnoDBSize(): int
+    {
+        if ($this->innoDBSize !== null) {
+            return $this->innoDBSize;
+        }
+
+        if (!$this->hasInnoDBSupport()) {
+            $this->innoDBSize = -1;
+
+            return $this->innoDBSize;
+        }
+
+        $res = $this->pdoDb->prepare('SELECT @@innodb_data_file_path AS path');
+        if ($res->execute() === false || !($innodbPath = $res->fetchObject())) {
+            return -1;
+        }
+
+        $this->innoDBSize = 0;
+        if (\stripos($innodbPath->path, 'autoextend') === false) {
+            $paths = \explode(';', $innodbPath->path);
+            foreach ($paths as $path) {
+                if (\preg_match('/:(\d+)([MGTKmgtk]+)/', $path, $hits)) {
+                    $this->innoDBSize += match (\strtoupper($hits[2])) {
+                        'T'     => (int)$hits[1] * 1024 * 1024 * 1024 * 1024,
+                        'G'     => (int)$hits[1] * 1024 * 1024 * 1024,
+                        'M'     => (int)$hits[1] * 1024 * 1024,
+                        'K'     => (int)$hits[1] * 1024,
+                        default => (int)$hits[1],
+                    };
+                }
+            }
+        }
+
+        return $this->innoDBSize;
     }
 }

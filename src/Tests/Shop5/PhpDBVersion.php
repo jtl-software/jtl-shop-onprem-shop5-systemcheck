@@ -2,7 +2,7 @@
 
 namespace Systemcheck\Tests\Shop5;
 
-use Systemcheck\Platform\MySQLVersion;
+use Systemcheck\Platform\DBServerInfo;
 use Systemcheck\Platform\PDOConnection;
 use Systemcheck\Tests\ProgramTest;
 
@@ -41,7 +41,7 @@ class PhpDBVersion extends ProgramTest
             return $this->handleNotSupported();
         }
 
-        $version             = new MySQLVersion($pdoDB);
+        $version             = new DBServerInfo($pdoDB);
         $this->isOptional    = false;
         $this->requiredState = '>= ' . $version->getMinSupportedVersion();
         $this->currentState  = $version->getVersion();
@@ -49,15 +49,15 @@ class PhpDBVersion extends ProgramTest
             $this->requiredState .= ' und < ' . $version->getMaxSupportedVersion();
         }
 
-        switch ($version->isShopSupported()) {
-            case MySQLVersion::MIN_SUPPORTED:
+        switch ($version->isSupportedVersion()) {
+            case DBServerInfo::MIN_SUPPORTED:
                 $this->isOptional    = true;
                 $this->isRecommended = true;
                 $this->description   = 'Für JTL-Shop wird ' . $version->getServer()
                     . ' ab Version ' . $version->getRecommendedVersion() . ' empfohlen.';
 
                 return false;
-            case MySQLVersion::SUPPORTED:
+            case DBServerInfo::SUPPORTED:
                 return true;
         }
 
