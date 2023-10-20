@@ -50,7 +50,11 @@ final class DBServerInfo
     /** @var bool|null */
     private ?bool $utf8Support = null;
 
+    /** @var int|null */
     private ?int $innoDBSize = null;
+
+    /** @var string|null */
+    private ?string $sqlMode = null;
 
     /**
      * DBServerInfo constructor
@@ -268,5 +272,24 @@ final class DBServerInfo
         }
 
         return $this->innoDBSize;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSQLMode(): ?string
+    {
+        if ($this->sqlMode !== null) {
+            return $this->sqlMode;
+        }
+
+        $res = $this->pdoDb->prepare(
+            "SHOW VARIABLES LIKE 'sql_mode'"
+        );
+        if ($res->execute() === false || !($sqlMode = $res->fetchObject())) {
+            return null;
+        }
+
+        return $sqlMode->Value;
     }
 }

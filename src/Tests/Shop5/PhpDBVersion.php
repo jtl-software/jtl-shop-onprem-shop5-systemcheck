@@ -3,40 +3,24 @@
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Platform\DBServerInfo;
-use Systemcheck\Platform\PDOConnection;
-use Systemcheck\Tests\ProgramTest;
+use Systemcheck\Tests\DBConnectionTest;
 
 /**
  * Class PhpDBVersion
  * @package Systemcheck\Tests\Shop5
  */
-class PhpDBVersion extends ProgramTest
+class PhpDBVersion extends DBConnectionTest
 {
     protected $name          = 'Datenbank-Version';
     protected $requiredState = '';
     protected $description   = '';
-    protected $isRecommended = true;
 
     /**
-     * @return bool
+     * @inheritdoc
      */
-    private function handleNotSupported(): bool
+    protected function handleDBAvailable(): bool
     {
-        $this->isOptional    = true;
-        $this->isRecommended = false;
-        $this->currentState  = 'nicht unterstützt';
-
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    private function handleDBAvailable(): bool
-    {
-        $pdoCon = PDOConnection::getInstance();
-        $pdoDB  = $pdoCon->getConnection();
-
+        $pdoDB = $this->getPdoDB();
         if ($pdoDB === null) {
             return $this->handleNotSupported();
         }
@@ -61,18 +45,5 @@ class PhpDBVersion extends ProgramTest
         }
 
         return false;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function execute(): bool
-    {
-        $dbTest = new PhpDBConnection();
-        if ($dbTest->execute()) {
-            return $this->handleDBAvailable();
-        }
-
-        return $this->handleNotSupported();
     }
 }

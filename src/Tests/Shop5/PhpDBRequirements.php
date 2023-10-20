@@ -3,40 +3,24 @@
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Platform\DBServerInfo;
-use Systemcheck\Platform\PDOConnection;
-use Systemcheck\Tests\ProgramTest;
+use Systemcheck\Tests\DBConnectionTest;
 
 /**
  * Class PhpDBRequirements
  * @package Systemcheck\Tests\Shop5
  */
-class PhpDBRequirements extends ProgramTest
+class PhpDBRequirements extends DBConnectionTest
 {
     protected $name          = 'Datenbank-Voraussetzungen';
     protected $requiredState = 'InnoDB, UTF-8';
     protected $description   = 'Für JTL-Shop ist Datenbankunterstützung für InnoDB und UTF-8 erforderlich.';
-    protected $isRecommended = true;
 
     /**
-     * @return bool
+     * @inheritdoc
      */
-    private function handleNotSupported(): bool
+    protected function handleDBAvailable(): bool
     {
-        $this->isOptional    = true;
-        $this->isRecommended = false;
-        $this->currentState  = 'nicht unterstützt';
-
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    private function handleDBAvailable(): bool
-    {
-        $pdoCon = PDOConnection::getInstance();
-        $pdoDB  = $pdoCon->getConnection();
-
+        $pdoDB = $this->getPdoDB();
         if ($pdoDB === null) {
             return $this->handleNotSupported();
         }
@@ -57,18 +41,5 @@ class PhpDBRequirements extends ProgramTest
         }
 
         return $utf8Support && $innoDBSupport;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function execute(): bool
-    {
-        $dbTest = new PhpDBConnection();
-        if ($dbTest->execute()) {
-            return $this->handleDBAvailable();
-        }
-
-        return $this->handleNotSupported();
     }
 }
