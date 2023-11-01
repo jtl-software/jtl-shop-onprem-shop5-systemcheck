@@ -100,7 +100,8 @@ class Environment
             $instance->setResult($instance->execute());
             if ($instance->getResult() !== AbstractTest::RESULT_OK) {
                 if (!$instance->getIsOptional()) {
-                    $this->passed = false;
+                    $result['requirements'][] = $instance;
+                    $this->passed             = false;
                 } elseif ($instance->getIsRecommended()) {
                     $result['recommendations'][] = $instance;
                 }
