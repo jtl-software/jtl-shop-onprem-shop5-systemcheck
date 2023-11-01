@@ -3,7 +3,6 @@
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpConfigTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpMemoryLimit
@@ -11,11 +10,11 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpMemoryLimit extends PhpConfigTest
 {
+    protected const MEMORY_LIMIT_MB = '128';
+
     protected $name          = 'memory_limit';
-    protected $requiredState = '>= 128MB';
+    protected $requiredState = '>= ' . self::MEMORY_LIMIT_MB . 'MB';
     protected $description   = '';
-    protected $isOptional    = false;
-    protected $isRecommended = false;
 
     /**
      * @inheritdoc
@@ -25,6 +24,7 @@ class PhpMemoryLimit extends PhpConfigTest
         $memoryLimit        = \ini_get('memory_limit');
         $this->currentState = $memoryLimit;
 
-        return ($memoryLimit == -1 || $this->shortHandToInt($memoryLimit) >= $this->shortHandToInt('64M'));
+        return ($memoryLimit == -1
+            || $this->shortHandToInt($memoryLimit) >= $this->shortHandToInt(self::MEMORY_LIMIT_MB . 'M'));
     }
 }
