@@ -79,7 +79,6 @@ final class DBServerInfo
      */
     private function splitServerInfo(string $info = 'server'): string
     {
-        // 8.0.34-0ubuntu0.20.04.1 / 10.6.14-MariaDB-1:10.6.14+maria~ubu1804
         $serverInfo = $this->getServerInfo();
         if (preg_match('/([\d.]+)-([\da-zA-Z]+)/', $serverInfo, $hits)) {
             $this->server        = stripos($hits[2], 'maria') !== false ? self::SERVER_MARIADB : self::SERVER_MYSQL;
