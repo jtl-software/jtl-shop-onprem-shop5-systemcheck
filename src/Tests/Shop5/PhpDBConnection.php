@@ -103,23 +103,21 @@ class PhpDBConnection extends ProgramTest
     {
         $default = parent::getDescription();
         if ($this->requireAuth) {
-            $default .= '<form method="post">'
+            $default .= '<form method="post" class="db_check_form">'
+                . '<div class="d-flex">'
                 . '<input type="hidden" name="dbAuth" value="1" />'
-                . '<table>'
-                . '<tr>'
-                . '<th><label for="dbHost">Datenbank Host</label>&nbsp;</th>'
-                . '<td><input id="dbHost" type="text" name="dbHost" value="localhost" />&nbsp;</td>'
-                . '<th><small>oder</small>&nbsp;<label for="dbSocket">Socket (optional)&nbsp;</label></th>'
-                . '<td><input id="dbSocket" type="text" name="dbSocket" /></td>'
-                . '</tr><tr>'
-                . '<th><label for="dbUser">Benutzername</label>&nbsp;</th>'
-                . '<td><input id="dbUser" type="text" name="dbUser" />&nbsp;</td>'
-                . '<th><label for="dbPassword">Passwort</label>&nbsp;</th>'
-                . '<td><input id="dbPassword" type="password" name="dbPassword" /></td>'
-                . '</tr><tr>'
-                . '<td><button type="submit">Testen</button></td>'
-                . '</tr>'
-                . '</table>'
+                . '<div class="form-group">'
+                . '<label for="dbHost">Datenbank Host</label>'
+                . '<input id="dbHost" type="text" class="input-control" name="dbHost" value="localhost" />'
+                . '<label for="dbSocket">Socket (optional)</label>'
+                . '<input id="dbSocket" type="text" class="input-control" name="dbSocket" />'
+                . '</div><div class="form-group">'
+                . '<label for="dbUser">Benutzername</label>'
+                . '<input id="dbUser" type="text" class="input-control" name="dbUser" />'
+                . '<label for="dbPassword">Passwort</label>'
+                . '<input id="dbPassword" type="password" class="input-control" name="dbPassword" />'
+                . '</div></div>'
+                . '<button type="submit" class="btn btn-primary">Testen</button>'
                 . '</form>';
         }
 
