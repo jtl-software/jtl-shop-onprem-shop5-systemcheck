@@ -42,6 +42,11 @@ class PhpDBVersion extends DBConnectionTest
                 return false;
             case DBServerInfo::SUPPORTED:
                 return true;
+            case DBServerInfo::MAX_SUPPORTED:
+                $this->isOptional    = true;
+                $this->description   = 'Für JTL-Shop wird ' . $version->getServer()
+                    . ' in einer Version < ' . $version->getMaxSupportedVersion() . ' empfohlen.'
+                    . ' Der Betrieb von JTL-Shop mit Version ' . $version->getVersion() . ' geschieht auf eigenes Risiko!';
         }
 
         return false;

@@ -18,6 +18,7 @@ final class DBServerInfo
     public const NOT_SUPPORTED = 0;
     public const MIN_SUPPORTED = 1;
     public const SUPPORTED     = 2;
+    public const MAX_SUPPORTED = 3;
 
     private const MIN_VERSION             = [
         self::SERVER_MYSQL   => '5.7.0',
@@ -120,16 +121,20 @@ final class DBServerInfo
      */
     public function isSupportedVersion(): int
     {
-        $version = $this->getVersion();
+        $version    = $this->getVersion();
+        $maxVersion = $this->getMaxSupportedVersion();
+        if ($maxVersion !== null && \version_compare($version, $maxVersion, '>=')) {
+            return self::MAX_SUPPORTED;
+        }
+
         if (\version_compare($version, $this->getMinSupportedVersion(), '>=')
             && \version_compare($version, $this->getRecommendedVersion(), '<')
         ) {
             return self::MIN_SUPPORTED;
         }
 
-        if (\version_compare($version, $this->getRecommendedVersion(), '>=')
-            && ($this->getMaxSupportedVersion() === null
-                || \version_compare($version, $this->getMaxSupportedVersion(), '<'))
+        if (($maxVersion === null || \version_compare($version, $maxVersion, '<'))
+            && \version_compare($version, $this->getRecommendedVersion(), '>=')
         ) {
             return self::SUPPORTED;
         }
