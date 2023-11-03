@@ -17,7 +17,6 @@ class PhpDBConnection extends ProgramTest
     protected $name          = 'Datenbank-Unterstützung';
     protected $requiredState = 'MySQL, MariaDB';
     protected $description   = 'Für JTL-Shop wird eine MySQL oder MariaDB Datenbank benötigt.';
-    protected $isRecommended = true;
 
     /** @var bool */
     private bool $requireAuth = false;
@@ -28,16 +27,15 @@ class PhpDBConnection extends ProgramTest
      */
     private function handleAuthenticated(?PDO $pdoDB): bool
     {
-        $this->requireAuth   = false;
-        $this->isOptional    = false;
-
         if ($pdoDB === null) {
+            $this->requireAuth  = true;
             $this->currentState = 'Anmeldung fehlgeschlagen';
 
             return false;
         }
 
         $version            = new DBServerInfo($pdoDB);
+        $this->requireAuth  = false;
         $this->currentState = $version->getServer();
 
         return $version->isSupportedServer();
@@ -49,7 +47,6 @@ class PhpDBConnection extends ProgramTest
     private function handleNotAuthenticated(): bool
     {
         $this->requireAuth   = true;
-        $this->isOptional    = true;
         $this->currentState  = 'Login erforderlich';
 
         return false;
@@ -61,7 +58,6 @@ class PhpDBConnection extends ProgramTest
     private function handleNotSupported(): bool
     {
         $this->requireAuth   = false;
-        $this->isOptional    = false;
         $this->currentState  = 'nicht unterstützt';
 
         return false;
