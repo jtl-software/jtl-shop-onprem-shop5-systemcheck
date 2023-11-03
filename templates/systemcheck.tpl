@@ -21,6 +21,41 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .db_check_form {
+            .d-flex {
+                display: flex;
+                flex-direction: column;
+            }
+            @media (min-width: 576px) {
+                .d-flex {
+                    flex-direction: row;
+                }
+            }
+            .form-group {
+                display: flex;
+                flex-direction: column;
+            }
+            .form-group .input-control {
+                flex: 1 1 auto;
+                display: block;
+                margin-bottom: 10px;
+                margin-right: 8px;
+                padding: 4px;
+                margin-top: -4px;
+            }
+            @media (min-width: 768px) {
+                .form-group .input-control {
+                    min-width: 220px;
+                }
+            }
+            @media (max-width: 576px) {
+                .form-group .input-control {
+                    width: 100%;
+                }
+            }
+        }
+    </style>
 </head>
 
 <body>
