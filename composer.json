@@ -1,7 +1,7 @@
 {
     "name": "jtlshop/shop5-systemcheck",
     "description": "Shop5 Systemcheck",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "keywords": ["jtl", "jtl-shop"],
     "homepage": "https://www.jtl-software.de/",
     "type": "library",
