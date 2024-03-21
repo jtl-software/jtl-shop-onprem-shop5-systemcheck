@@ -26,7 +26,7 @@ final class DBServerInfo
     ];
     private const MIN_RECOMMENDED_VERSION = [
         self::SERVER_MYSQL   => '8.0.0',
-        self::SERVER_MARIADB => '10.6.0'
+        self::SERVER_MARIADB => '10.5.0'
     ];
     private const MAX_VERSION             = [
         self::SERVER_MYSQL   => null,
