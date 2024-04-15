@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,7 +13,7 @@ use Systemcheck\Tests\DBConnectionTest;
  */
 class PhpDBVersion extends DBConnectionTest
 {
-    protected $name          = 'Datenbank-Version';
+    protected string $name          = 'Datenbank-Version';
     protected $requiredState = '';
     protected $description   = '';
 
@@ -35,18 +37,19 @@ class PhpDBVersion extends DBConnectionTest
 
         switch ($version->isSupportedVersion()) {
             case DBServerInfo::MIN_SUPPORTED:
-                $this->isOptional    = true;
-                $this->description   = 'Für JTL-Shop wird ' . $version->getServer()
+                $this->isOptional  = true;
+                $this->description = 'Für JTL-Shop wird ' . $version->getServer()
                     . ' ab Version ' . $version->getRecommendedVersion() . ' empfohlen.';
 
                 return false;
             case DBServerInfo::SUPPORTED:
                 return true;
             case DBServerInfo::MAX_SUPPORTED:
-                $this->isOptional    = true;
-                $this->description   = 'Für JTL-Shop wird ' . $version->getServer()
+                $this->isOptional  = true;
+                $this->description = 'Für JTL-Shop wird ' . $version->getServer()
                     . ' in einer Version < ' . $version->getMaxSupportedVersion() . ' empfohlen.'
-                    . ' Der Betrieb von JTL-Shop mit Version ' . $version->getVersion() . ' geschieht auf eigenes Risiko!';
+                    . ' Der Betrieb von JTL-Shop mit Version ' . $version->getVersion()
+                    . ' geschieht auf eigenes Risiko!';
         }
 
         return false;

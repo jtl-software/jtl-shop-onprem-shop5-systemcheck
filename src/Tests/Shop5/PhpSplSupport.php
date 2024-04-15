@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,11 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpSplSupport extends PhpModuleTest
 {
-    protected $name          = 'Standard PHP Library';
+    protected string $name          = 'Standard PHP Library';
     protected $requiredState = 'enabled';
     protected $description   = 'Für JTL-Shop5 wird Unterstützung für die Standard PHP Library (SPL) benötigt.';
-    protected $isOptional    = false;
-    protected $isRecommended = false;
+    protected bool $isOptional    = false;
+    protected bool $isRecommended = false;
 
     /**
      * @inheritdoc

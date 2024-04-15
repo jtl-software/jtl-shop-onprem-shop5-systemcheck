@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,14 +13,17 @@ use Systemcheck\Tests\AbstractTest;
  */
 class OperatingSystem extends ProgramTest
 {
-    protected $name          = 'Betriebssystem';
+    protected string $name          = 'Betriebssystem';
     protected $requiredState = 'Linux';
     protected $description   = 'JTL-Software empfiehlt den Betrieb mit Linux-Webservern. ' .
     'Der Betrieb unter Solaris, FreeBSD oder Windows wird weder empfohlen noch unterstützt.';
-    protected $isOptional    = true;
-    protected $isRecommended = true;
+    protected bool $isOptional    = true;
+    protected bool $isRecommended = true;
 
-    private $unameMap = [
+    /**
+     * @var array<string, string>
+     */
+    private array $unameMap = [
         'CYGWIN_NT-5.1' => 'Windows',
         'Darwin'        => 'Mac OS X',
         'IRIX64'        => 'IRIX',
@@ -27,7 +32,10 @@ class OperatingSystem extends ProgramTest
         'WINNT'         => 'Windows'
     ];
 
-    private $archMap = [
+    /**
+     * @var array<string, string>
+     */
+    private array $archMap = [
         'i386'   => 'Intel x86',
         'i486'   => 'Intel x86',
         'i586'   => 'Intel x86',

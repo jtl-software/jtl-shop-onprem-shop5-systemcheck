@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests;
 
@@ -10,25 +12,15 @@ abstract class PhpConfigTest extends AbstractTest
 {
     /**
      * @param string $shorthand
-     * @return float|int
+     * @return float|int|string
      */
     protected function shortHandToInt($shorthand)
     {
-        switch (\substr($shorthand, -1)) {
-            case 'M':
-            case 'm':
-                return (int)$shorthand * 1048576;
-
-            case 'K':
-            case 'k':
-                return (int)$shorthand * 1024;
-
-            case 'G':
-            case 'g':
-                return (int)$shorthand * 1073741824;
-
-            default:
-                return $shorthand;
-        }
+        return match (\substr($shorthand, -1)) {
+            'M', 'm' => (int)$shorthand * 1048576,
+            'K', 'k' => (int)$shorthand * 1024,
+            'G', 'g' => (int)$shorthand * 1073741824,
+            default  => $shorthand,
+        };
     }
 }

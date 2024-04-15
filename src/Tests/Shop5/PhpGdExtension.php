@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,11 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpGdExtension extends PhpModuleTest
 {
-    protected $name            = 'GD';
+    protected string $name            = 'GD';
     protected $requiredState   = 'enabled';
     protected $description     = 'Wird zur Bildbe- und Verarbeitung benötigt.';
-    protected $isOptional      = false;
-    protected $isRecommended   = false;
+    protected bool $isOptional      = false;
+    protected bool $isRecommended   = false;
     protected $isReplaceableBy = PhpImagickExtension::class;
 
     /**

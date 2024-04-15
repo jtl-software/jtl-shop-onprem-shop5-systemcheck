@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,11 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpJsonExtension extends PhpModuleTest
 {
-    protected $name          = 'JSON';
+    protected string $name          = 'JSON';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt PHP-Unterstützung für das JSON-Format.';
-    protected $isOptional    = false;
-    protected $isRecommended = false;
+    protected bool $isOptional    = false;
+    protected bool $isRecommended = false;
 
     /**
      * @inheritdoc

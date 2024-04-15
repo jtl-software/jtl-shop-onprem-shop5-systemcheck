@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,11 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpPostMaxSize extends PhpConfigTest
 {
-    protected $name          = 'post_max_size';
+    protected string $name          = 'post_max_size';
     protected $requiredState = '>= 8M';
     protected $description   = '';
-    protected $isOptional    = true;
-    protected $isRecommended = true;
+    protected bool $isOptional    = true;
+    protected bool $isRecommended = true;
 
     /**
      * @inheritdoc

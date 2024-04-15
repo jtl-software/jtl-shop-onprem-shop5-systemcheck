@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,11 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpXmlSimple extends PhpModuleTest
 {
-    protected $name          = 'SimpleXML';
+    protected string $name          = 'SimpleXML';
     protected $requiredState = 'enabled';
     protected $description   = 'Für JTL-Shop wird die PHP-Erweiterung Simple-XML benötigt.';
-    protected $isOptional    = false;
-    protected $isRecommended = true;
+    protected bool $isOptional    = false;
+    protected bool $isRecommended = true;
 
     /**
      * @inheritdoc

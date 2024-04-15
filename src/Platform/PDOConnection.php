@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Platform;
 
@@ -12,10 +14,14 @@ use stdClass;
  */
 final class PDOConnection
 {
-    /** @var PDO|null */
+    /**
+     * @var PDO|null
+     */
     private ?PDO $dbPDO = null;
 
-    /** @var PDOConnection|null */
+    /**
+     * @var PDOConnection|null
+     */
     private static ?self $instance = null;
 
     /**
@@ -39,7 +45,7 @@ final class PDOConnection
      * @param string $socket
      * @param string $user
      * @param string $pwd
-     * @return stdClass
+     * @return stdClass&object{dbHost: string, dbSocket: string, dbUser: string, dbPwd: string}
      */
     public static function createAuth(string $host, string $socket, string $user, string $pwd): stdClass
     {

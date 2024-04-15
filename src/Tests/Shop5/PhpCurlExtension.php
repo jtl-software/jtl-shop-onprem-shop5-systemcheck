@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -10,11 +12,11 @@ use Systemcheck\Tests\PhpModuleTest;
  */
 class PhpCurlExtension extends PhpModuleTest
 {
-    protected $name          = 'cURL';
+    protected string $name          = 'cURL';
     protected $requiredState = 'enabled';
     protected $description   = 'Wird benötigt um Webrequests auszuführen. (optional)';
-    protected $isOptional    = true;
-    protected $isRecommended = true;
+    protected bool $isOptional    = true;
+    protected bool $isRecommended = true;
 
     /**
      * @inheritdoc
@@ -24,4 +26,3 @@ class PhpCurlExtension extends PhpModuleTest
         return \extension_loaded('curl');
     }
 }
-

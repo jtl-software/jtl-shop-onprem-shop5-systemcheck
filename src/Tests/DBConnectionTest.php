@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests;
 
@@ -12,10 +14,15 @@ use Systemcheck\Tests\Shop5\PhpDBConnection;
  */
 abstract class DBConnectionTest extends ProgramTest
 {
-    /** @var PDO|null */
+    /**
+     * @var PDO|null
+     */
     private ?PDO $pdoDB = null;
 
-    protected $isRecommended = true;
+    /**
+     * @var bool
+     */
+    protected bool $isRecommended = true;
 
     /**
      * @return PDO|null

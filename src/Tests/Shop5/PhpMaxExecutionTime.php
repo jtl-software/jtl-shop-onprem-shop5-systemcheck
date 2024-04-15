@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,19 +13,19 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpMaxExecutionTime extends PhpConfigTest
 {
-    protected $name          = 'max_execution_time';
+    protected string $name          = 'max_execution_time';
     protected $requiredState = '>= 120';
     protected $description   = 'Für den Betrieb von JTL-Shop wird eine ausreichend lange Skriptlaufzeit benötigt, ' .
     'damit auch längere Aufgaben (z.B. Newsletterversand) zuverlässig funktionieren.';
-    protected $isOptional    = true;
-    protected $isRecommended = true;
+    protected bool $isOptional    = true;
+    protected bool $isRecommended = true;
 
     /**
      * @inheritdoc
      */
     public function execute(): bool
     {
-        $maxExecutionTime = \ini_get('max_execution_time');
+        $maxExecutionTime   = \ini_get('max_execution_time');
         $this->currentState = $maxExecutionTime;
 
         return $maxExecutionTime == 0 || $maxExecutionTime >= 120;
