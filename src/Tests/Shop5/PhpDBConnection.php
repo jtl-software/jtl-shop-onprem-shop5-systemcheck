@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
@@ -14,7 +15,7 @@ use Systemcheck\Tests\ProgramTest;
  */
 class PhpDBConnection extends ProgramTest
 {
-    protected $name          = 'Datenbank-Unterstützung';
+    protected string $name          = 'Datenbank-Unterstützung';
     protected $requiredState = 'MySQL, MariaDB';
     protected $description   = 'Für JTL-Shop wird eine MySQL oder MariaDB Datenbank benötigt.';
 
@@ -46,8 +47,8 @@ class PhpDBConnection extends ProgramTest
      */
     private function handleNotAuthenticated(): bool
     {
-        $this->requireAuth   = true;
-        $this->currentState  = 'Login erforderlich';
+        $this->requireAuth  = true;
+        $this->currentState = 'Login erforderlich';
 
         return false;
     }
@@ -57,8 +58,8 @@ class PhpDBConnection extends ProgramTest
      */
     private function handleNotSupported(): bool
     {
-        $this->requireAuth   = false;
-        $this->currentState  = 'nicht unterstützt';
+        $this->requireAuth  = false;
+        $this->currentState = 'nicht unterstützt';
 
         return false;
     }

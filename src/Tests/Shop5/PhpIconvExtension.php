@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpIconvExtension extends PhpModuleTest
 {
-    protected $name          = 'Iconv';
+    protected string $name          = 'Iconv';
     protected $requiredState = 'enabled';
-    protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-iconv</code> für die Internationalisierung.';
-    protected $isOptional    = false;
-    protected $isRecommended = true;
+    protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-iconv</code> '
+    . 'für die Internationalisierung.';
+    protected bool $isOptional    = false;
+    protected bool $isRecommended = true;
 
     /**
      * @inheritdoc

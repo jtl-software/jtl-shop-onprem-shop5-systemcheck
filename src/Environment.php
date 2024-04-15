@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck;
 
@@ -17,7 +19,7 @@ class Environment
     /**
      * @var bool
      */
-    protected $passed = false;
+    protected bool $passed = false;
 
     /**
      * @return bool
@@ -41,7 +43,7 @@ class Environment
             while (($file = \readdir($dh)) !== false) {
                 // skip hidden files too! (starting with dots in 'nix-like systems),
                 // and skip "_"-starting files, to make "deactivation" as simple as possible in the filesystem
-                if ($file === '.' || $file === '..' || \strpos($file, '.php') === false) {
+                if ($file === '.' || $file === '..' || !\str_contains($file, '.php')) {
                     continue;
                 }
                 if (\is_dir($folder . '/' . $file)) {
@@ -53,7 +55,7 @@ class Environment
         }
 
         foreach ($files as $key => $file) {
-            $files[$key] = 'Systemcheck\Tests\\' . $group . '\\' . \rtrim($file, '.php');
+            $files[$key] = 'Systemcheck\Tests\\' . $group . '\\' . \rtrim($file, '.ph');
         }
 
         return $files;
@@ -62,7 +64,8 @@ class Environment
 
     /**
      * @param string $group
-     * @return array
+     * @return array{recommendations: array<AbstractTest>, apache_config: array<AbstractTest>,
+     *      php_config: array<AbstractTest>, php_modules: array<AbstractTest>, programs: array<AbstractTest>}
      */
     public function executeTestGroup(string $group): array
     {

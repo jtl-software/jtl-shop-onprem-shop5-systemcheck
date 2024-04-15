@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,11 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpXMLExtension extends PhpModuleTest
 {
-    protected $name          = 'XML';
+    protected string $name          = 'XML';
     protected $requiredState = 'enabled';
     protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-xml</code>.';
-    protected $isOptional    = false;
-    protected $isRecommended = true;
+    protected bool $isOptional    = false;
+    protected bool $isRecommended = true;
 
     /**
      * @inheritdoc

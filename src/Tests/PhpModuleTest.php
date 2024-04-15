@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests;
 
@@ -10,5 +12,4 @@ namespace Systemcheck\Tests;
  */
 abstract class PhpModuleTest extends AbstractTest
 {
-
 }

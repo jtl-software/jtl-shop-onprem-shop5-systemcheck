@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,9 +13,10 @@ use Systemcheck\Tests\DBConnectionTest;
  */
 class PhpDBSQLMode extends DBConnectionTest
 {
-    protected $name          = 'Datenbank-SQL Mode';
+    protected string $name          = 'Datenbank-SQL Mode';
     protected $requiredState = 'off';
-    protected $description   = 'Bestimmte Einstellungen für den SQL-Mode können zu fehlerhaftem Verhalten in JTL-Shop führen.';
+    protected $description   = 'Bestimmte Einstellungen für den SQL-Mode können zu '
+    . 'fehlerhaftem Verhalten in JTL-Shop führen.';
 
     /**
      * @inheritdoc
@@ -54,8 +57,8 @@ class PhpDBSQLMode extends DBConnectionTest
 
         if ($this->getResult() === self::RESULT_FAILED) {
             $description .= '<br>Entfernen Sie das define für DB_DEFAULT_SQL_MODE aus Ihrer config.JTL-Shop.ini.php '
-                           .'oder setzen Sie dieses explizit auf false, um den SQL-Mode von JTL-Shop korrigieren '
-                           .'zu lassen.';
+                           . 'oder setzen Sie dieses explizit auf false, um den SQL-Mode von JTL-Shop korrigieren '
+                           . 'zu lassen.';
         }
 
         return $description;

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Platform;
 
@@ -8,51 +10,32 @@ namespace Systemcheck\Platform;
  */
 class Hosting
 {
-    /**
-     * PROVIDER_1UND1
-     */
     public const PROVIDER_1UND1 = '1und1';
 
-    /**
-     * PROVIDER_STRATO
-     */
     public const PROVIDER_STRATO = 'strato';
 
-    /**
-     * PROVIDER_HOSTEUROPE
-     */
     public const PROVIDER_HOSTEUROPE = 'hosteurope';
 
-    /**
-     * PROVIDER_ALFAHOSTING
-     */
     public const PROVIDER_ALFAHOSTING = 'alfahosting';
 
-    /**
-     * PROVIDER_JTL
-     */
     public const PROVIDER_JTL = 'jtl';
 
-    /**
-     * PROVIDER_HETZNER
-     */
     public const PROVIDER_HETZNER = 'hetzner';
 
     /**
-     * hostname
-     * @var string
+     * @var string|null
      */
-    protected $hostname;
+    protected ?string $hostname = null;
 
     /**
      * @var string
      */
-    protected $documentRoot;
+    protected string $documentRoot;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $provider;
+    protected ?string $provider = null;
 
     /**
      * Hosting constructor.
@@ -64,7 +47,7 @@ class Hosting
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getHostname(): ?string
     {
@@ -115,5 +98,4 @@ class Hosting
             $this->provider = self::PROVIDER_ALFAHOSTING;
         }
     }
-
 }

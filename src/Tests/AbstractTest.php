@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests;
 
@@ -19,7 +21,7 @@ abstract class AbstractTest implements JsonSerializable
     /**
      * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string
@@ -29,7 +31,7 @@ abstract class AbstractTest implements JsonSerializable
     /**
      * @var int
      */
-    protected $result = self::RESULT_FAILED;
+    protected int $result = self::RESULT_FAILED;
 
     /**
      * @var string
@@ -44,12 +46,12 @@ abstract class AbstractTest implements JsonSerializable
     /**
      * @var bool
      */
-    protected $isRecommended = false;
+    protected bool $isRecommended = false;
 
     /**
      * @var bool
      */
-    protected $isOptional = false;
+    protected bool $isOptional = false;
 
     /**
      * @return string|null
@@ -121,7 +123,7 @@ abstract class AbstractTest implements JsonSerializable
     }
 
     /**
-     * @return int
+     * @return self::RESULT_FAILED|self::RESULT_OK|self::RESULT_UNKNOWN
      */
     public function getResult(): int
     {

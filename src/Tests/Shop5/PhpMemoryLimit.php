@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -12,7 +14,7 @@ class PhpMemoryLimit extends PhpConfigTest
 {
     protected const MEMORY_LIMIT_MB = '128';
 
-    protected $name          = 'memory_limit';
+    protected string $name          = 'memory_limit';
     protected $requiredState = '>= ' . self::MEMORY_LIMIT_MB . 'MB';
     protected $description   = '';
 

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,11 +13,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpAllowUrlFopen extends PhpConfigTest
 {
-    protected $name          = 'allow_url_fopen';
+    protected string $name          = 'allow_url_fopen';
     protected $requiredState = 'on';
-    protected $description   = 'Wird benötigt um Dateien auf entfernten Systemen zu öffnen und zu bearbeiten. (optional)';
-    protected $isOptional    = true;
-    protected $isRecommended = true;
+    protected $description   = 'Wird benötigt um Dateien auf entfernten Systemen zu öffnen '
+    . 'und zu bearbeiten. (optional)';
+    protected bool $isOptional    = true;
+    protected bool $isRecommended = true;
 
     /**
      * @inheritdoc

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Platform;
 
@@ -33,28 +35,42 @@ final class DBServerInfo
         self::SERVER_MARIADB => '10.12.0'
     ];
 
-    /** @var PDO */
+    /**
+     * @var PDO
+     */
     private PDO $pdoDb;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     private ?string $serverInfo = null;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     private ?string $serverVersion = null;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     private ?string $server = null;
 
-    /** @var bool|null */
+    /**
+     * @var bool|null
+     */
     private ?bool $innoDBSupport = null;
 
     /** @var bool|null */
     private ?bool $utf8Support = null;
 
-    /** @var int|null */
+    /**
+     * @var int|null
+     */
     private ?int $innoDBSize = null;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     private ?string $sqlMode = null;
 
     /**
@@ -81,8 +97,8 @@ final class DBServerInfo
     private function splitServerInfo(string $info = 'server'): string
     {
         $serverInfo = $this->getServerInfo();
-        if (preg_match('/([\d.]+)-?([\da-zA-Z]+)?/', $serverInfo, $hits)) {
-            $this->server        = stripos($hits[2] ?? '', 'maria') !== false
+        if (\preg_match('/([\d.]+)-?([\da-zA-Z]+)?/', $serverInfo, $hits)) {
+            $this->server        = \stripos($hits[2] ?? '', 'maria') !== false
                 ? self::SERVER_MARIADB
                 : self::SERVER_MYSQL;
             $this->serverVersion = $hits[1];
@@ -129,13 +145,15 @@ final class DBServerInfo
             return self::MAX_SUPPORTED;
         }
 
-        if (\version_compare($version, $this->getMinSupportedVersion(), '>=')
+        if (
+            \version_compare($version, $this->getMinSupportedVersion(), '>=')
             && \version_compare($version, $this->getRecommendedVersion(), '<')
         ) {
             return self::MIN_SUPPORTED;
         }
 
-        if (($maxVersion === null || \version_compare($version, $maxVersion, '<'))
+        if (
+            ($maxVersion === null || \version_compare($version, $maxVersion, '<'))
             && \version_compare($version, $this->getRecommendedVersion(), '>=')
         ) {
             return self::SUPPORTED;

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Systemcheck\Tests\Shop5;
 
@@ -11,7 +13,7 @@ use Systemcheck\Tests\DBConnectionTest;
  */
 class PhpDBRequirements extends DBConnectionTest
 {
-    protected $name          = 'Datenbank-Voraussetzungen';
+    protected string $name          = 'Datenbank-Voraussetzungen';
     protected $requiredState = 'InnoDB, UTF-8';
     protected $description   = 'Für JTL-Shop ist Datenbankunterstützung für InnoDB und UTF-8 erforderlich.';
 
