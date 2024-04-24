@@ -33,7 +33,7 @@ class Environment
      * Enumerate tests for a specific test group name
      *
      * @param string $group
-     * @return array
+     * @return array<int, class-string>
      */
     private function getTests(string $group): array
     {

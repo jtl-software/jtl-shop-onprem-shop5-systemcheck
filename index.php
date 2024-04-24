@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use Systemcheck\Environment;
 use Systemcheck\Platform\Hosting;
@@ -10,9 +12,9 @@ ini_set('display_errors', '1');
 /**
  * @param array                    $params
  * @param Smarty_Internal_Template $smarty
- * @return mixed
+ * @return string
  */
-function getResults($params, $smarty)
+function getResults(array $params, $smarty): string
 {
     return $smarty->assign('test', $params['test'])->fetch('testResult.tpl');
 }
@@ -32,6 +34,6 @@ try {
         ->setCacheDir($templatePath)
         ->setCompileDir($templatePath)
         ->display('systemcheck.tpl');
-} catch (\Exception $e) {
-    echo \get_class($e). ': ' . $e->getMessage();
+} catch (Exception $e) {
+    echo get_class($e) . ': ' . $e->getMessage();
 }

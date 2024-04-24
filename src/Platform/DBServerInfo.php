@@ -173,7 +173,6 @@ final class DBServerInfo
 
         try {
             $res = $this->pdoDb->prepare(
-                /** @lang text */
                 "SELECT `SUPPORT`
                     FROM information_schema.ENGINES
                     WHERE `ENGINE` = 'InnoDB'"
@@ -189,9 +188,7 @@ final class DBServerInfo
 
             $this->innoDBSupport = null;
 
-            $res = $this->pdoDb->prepare(
-                "SHOW VARIABLES LIKE 'innodb_version'"
-            );
+            $res = $this->pdoDb->prepare("SHOW VARIABLES LIKE 'innodb_version'");
             if ($res->execute() === false || !($version = $res->fetchObject())) {
                 return false;
             }
@@ -215,7 +212,6 @@ final class DBServerInfo
 
         try {
             $res = $this->pdoDb->prepare(
-                /** @lang text */
                 "SELECT `IS_COMPILED`
                     FROM information_schema.COLLATIONS
                     WHERE `COLLATION_NAME` RLIKE 'utf8(mb4)?_unicode_ci'"
@@ -306,10 +302,7 @@ final class DBServerInfo
         if ($this->sqlMode !== null) {
             return $this->sqlMode;
         }
-
-        $res = $this->pdoDb->prepare(
-            "SHOW VARIABLES LIKE 'sql_mode'"
-        );
+        $res = $this->pdoDb->prepare("SHOW VARIABLES LIKE 'sql_mode'");
         if ($res->execute() === false || !($sqlMode = $res->fetchObject())) {
             return null;
         }

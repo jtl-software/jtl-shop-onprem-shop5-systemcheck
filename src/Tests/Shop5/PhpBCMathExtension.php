@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpModuleTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpBCMathExtension
@@ -13,11 +12,13 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpBCMathExtension extends PhpModuleTest
 {
-    protected string $name          = 'BCMath';
-    protected $requiredState = 'enabled';
-    protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-bcmath</code> '
+    protected string $name = 'BCMath';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-bcmath</code> '
     . 'für diverse Berechnungen.';
-    protected bool $isOptional    = false;
+
     protected bool $isRecommended = true;
 
     /**

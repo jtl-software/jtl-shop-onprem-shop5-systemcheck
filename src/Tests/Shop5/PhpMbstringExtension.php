@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpModuleTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpMbstringExtension
@@ -13,11 +12,13 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpMbstringExtension extends PhpModuleTest
 {
-    protected string $name          = 'mbstring';
-    protected $requiredState = 'enabled';
-    protected $description   = 'Die <code>mbstring</code>-Erweiterung ist zum Betrieb des '
+    protected string $name = 'mbstring';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'Die <code>mbstring</code>-Erweiterung ist zum Betrieb des '
     . 'JTL-Shop zwingend erforderlich.';
-    protected bool $isOptional    = false;
+
     protected bool $isRecommended = true;
 
     /**

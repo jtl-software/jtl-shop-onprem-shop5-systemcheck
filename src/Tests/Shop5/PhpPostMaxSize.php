@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpConfigTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpPostMaxSize
@@ -13,10 +12,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpPostMaxSize extends PhpConfigTest
 {
-    protected string $name          = 'post_max_size';
-    protected $requiredState = '>= 8M';
-    protected $description   = '';
-    protected bool $isOptional    = true;
+    protected string $name = 'post_max_size';
+
+    protected string $requiredState = '>= 8M';
+
+    protected bool $isOptional = true;
+
     protected bool $isRecommended = true;
 
     /**
@@ -24,7 +25,10 @@ class PhpPostMaxSize extends PhpConfigTest
      */
     public function execute(): bool
     {
-        $postMaxSize        = \ini_get('post_max_size');
+        $postMaxSize = \ini_get('post_max_size');
+        if ($postMaxSize === false) {
+            return false;
+        }
         $this->currentState = $postMaxSize;
 
         return $this->shortHandToInt($postMaxSize) >= $this->shortHandToInt('8M');

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpModuleTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpSocketSupport
@@ -13,10 +12,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpSocketSupport extends PhpModuleTest
 {
-    protected string $name          = 'Sockets';
-    protected $requiredState = 'enabled';
-    protected $description   = '';
-    protected bool $isOptional    = true;
+    protected string $name = 'Sockets';
+
+    protected string $requiredState = 'enabled';
+
+    protected bool $isOptional = true;
+
     protected bool $isRecommended = true;
 
     /**

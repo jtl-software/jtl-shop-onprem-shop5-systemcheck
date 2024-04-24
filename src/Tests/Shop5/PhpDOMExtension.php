@@ -12,10 +12,12 @@ use Systemcheck\Tests\PhpModuleTest;
  */
 class PhpDOMExtension extends PhpModuleTest
 {
-    protected string $name          = 'DOM';
-    protected $requiredState = 'enabled';
-    protected $description   = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-dom</code>.';
-    protected bool $isOptional    = false;
+    protected string $name = 'DOM';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-dom</code>.';
+
     protected bool $isRecommended = true;
 
     /**

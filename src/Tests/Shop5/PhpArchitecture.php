@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\ProgramTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpArchitecture
@@ -13,11 +12,9 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpArchitecture extends ProgramTest
 {
-    protected string $name          = 'Architektur';
-    protected $requiredState = '64bit';
-    protected $description   = '';
-    protected bool $isOptional    = false;
-    protected bool $isRecommended = false;
+    protected string $name = 'Architektur';
+
+    protected string $requiredState = '64bit';
 
     /**
      * @inheritdoc

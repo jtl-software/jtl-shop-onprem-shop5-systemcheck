@@ -12,10 +12,12 @@ use Systemcheck\Tests\PhpModuleTest;
  */
 class PhpCalendarExtension extends PhpModuleTest
 {
-    protected string $name        = 'calendar';
-    protected $requiredState      = 'enabled';
-    protected $description        = 'Wird für die Konvertierung zwischen Kalenderformaten benötigt.';
-    protected bool $isOptional    = false;
+    protected string $name = 'calendar';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'Wird für die Konvertierung zwischen Kalenderformaten benötigt.';
+
     protected bool $isRecommended = true;
 
     /**

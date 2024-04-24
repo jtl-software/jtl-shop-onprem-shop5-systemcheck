@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\ProgramTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpSapi
@@ -13,10 +12,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpSapi extends ProgramTest
 {
-    protected string $name          = 'PHP-SAPI';
-    protected $requiredState = 'Apache2, FastCGI, FPM';
-    protected $description   = '';
-    protected bool $isOptional    = true;
+    protected string $name = 'PHP-SAPI';
+
+    protected string $requiredState = 'Apache2, FastCGI, FPM';
+
+    protected bool $isOptional = true;
+
     protected bool $isRecommended = true;
 
     /**
@@ -35,7 +36,7 @@ class PhpSapi extends ProgramTest
             'fpm'            => 'FPM',
             'cli'            => 'CLI'
         ];
-        $this->currentState = $sapiNames[$sapi] ?? null;
+        $this->currentState = $sapiNames[$sapi] ?? 'Unknown SAPI';
         if (\array_key_exists($sapi, $sapiNames)) {
             return true;
         }

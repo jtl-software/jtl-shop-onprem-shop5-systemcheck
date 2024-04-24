@@ -12,10 +12,14 @@ use Systemcheck\Tests\PhpModuleTest;
  */
 class PhpCurlExtension extends PhpModuleTest
 {
-    protected string $name          = 'cURL';
-    protected $requiredState = 'enabled';
-    protected $description   = 'Wird benötigt um Webrequests auszuführen. (optional)';
-    protected bool $isOptional    = true;
+    protected string $name = 'cURL';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'Wird benötigt um Webrequests auszuführen. (optional)';
+
+    protected bool $isOptional = true;
+
     protected bool $isRecommended = true;
 
     /**
