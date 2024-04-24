@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\ProgramTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class OperatingSystem
@@ -13,11 +12,15 @@ use Systemcheck\Tests\AbstractTest;
  */
 class OperatingSystem extends ProgramTest
 {
-    protected string $name          = 'Betriebssystem';
-    protected $requiredState = 'Linux';
-    protected $description   = 'JTL-Software empfiehlt den Betrieb mit Linux-Webservern. ' .
+    protected string $name = 'Betriebssystem';
+
+    protected string $requiredState = 'Linux';
+
+    protected string $description = 'JTL-Software empfiehlt den Betrieb mit Linux-Webservern. ' .
     'Der Betrieb unter Solaris, FreeBSD oder Windows wird weder empfohlen noch unterstützt.';
-    protected bool $isOptional    = true;
+
+    protected bool $isOptional = true;
+
     protected bool $isRecommended = true;
 
     /**

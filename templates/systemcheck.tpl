@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="JTL-Shop-Systemcheck">
     <meta name="author" content="JTL-Software GmbH">
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico"/>
 
     <title>JTL-Shop-Systemcheck</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans" media="screen, projection">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans"
+          media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu"
+          media="screen, projection">
     <link href="layout/css/bootstrap.css" rel="stylesheet">
     <link href="layout/css/systemcheck.css" rel="stylesheet">
 
@@ -27,15 +29,18 @@
                 display: flex;
                 flex-direction: column;
             }
+
             @media (min-width: 576px) {
                 .d-flex {
                     flex-direction: row;
                 }
             }
+
             .form-group {
                 display: flex;
                 flex-direction: column;
             }
+
             .form-group .input-control {
                 flex: 1 1 auto;
                 display: block;
@@ -44,6 +49,7 @@
                 padding: 4px;
                 margin-top: -4px;
             }
+
             @media (min-width: 768px) {
                 .form-group .input-control {
                     min-width: 220px;
@@ -101,7 +107,8 @@
                     {elseif $platform->getProvider() === 'alfahosting'}
                         Alfahosting
                     {else}
-                        <em>unbekannt</em> (Hostname: {$platform->getHostname()})
+                        <em>unbekannt</em>
+                        (Hostname: {$platform->getHostname()})
                     {/if}
                 </p>
             </div>

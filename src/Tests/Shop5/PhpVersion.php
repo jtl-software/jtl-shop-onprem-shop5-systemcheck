@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\ProgramTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpVersion
@@ -13,11 +12,9 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpVersion extends ProgramTest
 {
-    protected string $name          = 'PHP-Version';
-    protected $requiredState = '>8.1.0';
-    protected $description   = '';
-    protected bool $isOptional    = false;
-    protected bool $isRecommended = false;
+    protected string $name = 'PHP-Version';
+
+    protected string $requiredState = '>8.1.0';
 
     /**
      * @inheritdoc

@@ -13,9 +13,9 @@ use Systemcheck\Tests\DBConnectionTest;
  */
 class PhpDBVersion extends DBConnectionTest
 {
-    protected string $name          = 'Datenbank-Version';
-    protected $requiredState = '';
-    protected $description   = '';
+    protected string $name = 'Datenbank-Version';
+
+    protected string $requiredState = '';
 
     /**
      * @inheritdoc

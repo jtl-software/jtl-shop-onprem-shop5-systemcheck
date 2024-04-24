@@ -1,16 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpModuleTest;
 
 class PhpFileinfoExtension extends PhpModuleTest
 {
-    protected string $name          = 'fileinfo';
-    protected $requiredState = 'enabled';
-    protected $description   = 'Die Erweiterung wird genutzt um Dateityp und Kodierung einer Datei '
+    protected string $name = 'fileinfo';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'Die Erweiterung wird genutzt um Dateityp und Kodierung einer Datei '
     . 'zu ermitteln. z.B. für die Bilderschnittstelle oder im Filecheck.';
-    protected bool $isOptional    = false;
+
     protected bool $isRecommended = true;
 
     /**

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpModuleTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpPdoMysqlSupport
@@ -13,12 +12,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpPdoMysqlSupport extends PhpModuleTest
 {
-    protected string $name          = 'PDO::MySQL';
-    protected $requiredState = 'enabled';
-    protected $description   = 'Für JTL-Shop wird die Unterstützung für PHP-Data-Objects ' .
+    protected string $name = 'PDO::MySQL';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'Für JTL-Shop wird die Unterstützung für PHP-Data-Objects ' .
     '(<code>php-pdo</code> und <code>php-mysql</code>) benötigt.';
-    protected bool $isOptional    = false;
-    protected bool $isRecommended = false;
 
     /**
      * @inheritdoc

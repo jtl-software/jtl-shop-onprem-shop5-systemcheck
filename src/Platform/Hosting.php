@@ -78,12 +78,13 @@ class Hosting
         return \PHP_VERSION;
     }
 
-    /**
-     *
-     */
     private function detect(): void
     {
-        $this->hostname = \gethostbyaddr($_SERVER['SERVER_ADDR'] ?? '127.0.0.1');
+        $host = \gethostbyaddr($_SERVER['SERVER_ADDR'] ?? '127.0.0.1');
+        if ($host === false) {
+            return;
+        }
+        $this->hostname = $host;
         if (\preg_match('/jtl-software\.de$/', $this->hostname)) {
             $this->provider = self::PROVIDER_JTL;
         } elseif (\preg_match('/hosteurope\.de$/', $this->hostname)) {

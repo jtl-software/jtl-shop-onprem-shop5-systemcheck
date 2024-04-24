@@ -14,7 +14,7 @@ abstract class PhpConfigTest extends AbstractTest
      * @param string $shorthand
      * @return float|int|string
      */
-    protected function shortHandToInt($shorthand)
+    protected function shortHandToInt(string $shorthand)
     {
         return match (\substr($shorthand, -1)) {
             'M', 'm' => (int)$shorthand * 1048576,

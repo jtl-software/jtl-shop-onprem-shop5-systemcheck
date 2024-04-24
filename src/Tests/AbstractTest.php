@@ -26,7 +26,7 @@ abstract class AbstractTest implements JsonSerializable
     /**
      * @var string
      */
-    protected $currentState;
+    protected string $currentState = '';
 
     /**
      * @var int
@@ -36,12 +36,12 @@ abstract class AbstractTest implements JsonSerializable
     /**
      * @var string
      */
-    protected $requiredState;
+    protected string $requiredState;
 
     /**
      * @var string
      */
-    protected $description;
+    protected string $description = '';
 
     /**
      * @var bool
@@ -54,33 +54,33 @@ abstract class AbstractTest implements JsonSerializable
     protected bool $isOptional = false;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getRequiredState(): ?string
+    public function getRequiredState(): string
     {
         return $this->requiredState;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getCurrentState(): ?string
+    public function getCurrentState(): string
     {
         return $this->currentState;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -103,9 +103,9 @@ abstract class AbstractTest implements JsonSerializable
     }
 
     /**
-     * @return bool|string
+     * @return string|false
      */
-    public function getIsReplaceableBy()
+    public function getIsReplaceableBy(): bool|string
     {
         return \property_exists($this, 'isReplaceableBy')
             ? $this->isReplaceableBy
@@ -115,7 +115,7 @@ abstract class AbstractTest implements JsonSerializable
     /**
      * @return bool|null
      */
-    public function getRunStandAlone()
+    public function getRunStandAlone(): ?bool
     {
         return \property_exists($this, 'runStandAlone')
             ? $this->runStandAlone

@@ -22,7 +22,7 @@ class Filesystem
     /**
      * array of all shop folders
      *
-     * @var array
+     * @var string[]
      */
     protected array $shopFolders = [];
 
@@ -108,8 +108,6 @@ class Filesystem
     ];
 
     /**
-     * Constructor of the file-check-object
-     *
      * @param string $rootPath root-path of this shop-application
      */
     public function __construct(string $rootPath)
@@ -122,7 +120,7 @@ class Filesystem
      * helper  to get the paths we want
      * (this should prevent functionality in a "difines"-config-file)
      *
-     * @return array string-array of to-writable paths
+     * @return string[]
      */
     private function collectWritableEntities(): array
     {
@@ -136,9 +134,7 @@ class Filesystem
     }
 
     /**
-     * helper to get all shop-folders as array, only for display-purposes
-     *
-     * @return array with folder-names (unchecked)
+     * @return string[]
      */
     public function getFolders(): array
     {
@@ -146,12 +142,7 @@ class Filesystem
     }
 
     /**
-     * Check the folders (one times), given in "includes/defines.php"
-     * and store the results in this object for later usage
-     * (refactored and moved from "install_inc::gibBeschreibbareVerzeichnisseAssoc()")
-     *
-     * @return array  hash of shop-writable-folder, where value represents the state
-     *                (1=writable, ''=not writable)
+     * @return array<string, bool>
      */
     public function getFoldersChecked(): array
     {
@@ -166,7 +157,7 @@ class Filesystem
         $current = $this->shopFolders;
         foreach ($current as $item) {
             $folders[$item] = false;
-            $abs            = \PFAD_ROOT . $item;
+            $abs            = $this->rootPath . $item;
             if (\is_writable($abs)) {
                 // if entity (implicitly exists and) is writable
                 $folders[$item] = true;
@@ -186,18 +177,17 @@ class Filesystem
     }
 
     /**
-     * return a summary-result of this test, depending on the checked-folders-array.
-     * if at least one folder is not writable, the test is failed
-     *
      * @return bool
      */
     public function getIsPassed(): bool
     {
         $checkedFolders = $this->getFoldersChecked();
-        foreach (\array_keys($checkedFolders) as $key) {
-            (!(bool)$checkedFolders[$key])
-                ? $this->passed = false
-                : null;
+        foreach ($checkedFolders as $ok) {
+            if ($ok === false) {
+                $this->passed = false;
+
+                return false;
+            }
         }
 
         return $this->passed;

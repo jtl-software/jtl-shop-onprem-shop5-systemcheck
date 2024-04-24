@@ -13,9 +13,11 @@ use Systemcheck\Tests\DBConnectionTest;
  */
 class PhpDBSQLMode extends DBConnectionTest
 {
-    protected string $name          = 'Datenbank-SQL Mode';
-    protected $requiredState = 'off';
-    protected $description   = 'Bestimmte Einstellungen für den SQL-Mode können zu '
+    protected string $name = 'Datenbank-SQL Mode';
+
+    protected string $requiredState = 'off';
+
+    protected string $description = 'Bestimmte Einstellungen für den SQL-Mode können zu '
     . 'fehlerhaftem Verhalten in JTL-Shop führen.';
 
     /**
@@ -24,7 +26,7 @@ class PhpDBSQLMode extends DBConnectionTest
     protected function handleDBAvailable(): bool
     {
         $pdoDB = $this->getPdoDB();
-        if ($pdoDB === null || !defined('DB_DEFAULT_SQL_MODE')) {
+        if ($pdoDB === null || !\defined('DB_DEFAULT_SQL_MODE')) {
             return $this->handleNotSupported();
         }
 
@@ -36,7 +38,7 @@ class PhpDBSQLMode extends DBConnectionTest
 
         $version = new DBServerInfo($pdoDB);
         $sqlMode = $version->getSQLMode();
-        if (stripos($sqlMode, 'strict') !== false || stripos($sqlMode, 'only_full_group_by') !== false) {
+        if (\stripos($sqlMode, 'strict') !== false || \stripos($sqlMode, 'only_full_group_by') !== false) {
             $this->currentState = 'strict on';
             $this->isOptional   = false;
 
@@ -51,14 +53,14 @@ class PhpDBSQLMode extends DBConnectionTest
     /**
      * @inheritDoc
      */
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         $description = parent::getDescription();
 
         if ($this->getResult() === self::RESULT_FAILED) {
             $description .= '<br>Entfernen Sie das define für DB_DEFAULT_SQL_MODE aus Ihrer config.JTL-Shop.ini.php '
-                           . 'oder setzen Sie dieses explizit auf false, um den SQL-Mode von JTL-Shop korrigieren '
-                           . 'zu lassen.';
+                . 'oder setzen Sie dieses explizit auf false, um den SQL-Mode von JTL-Shop korrigieren '
+                . 'zu lassen.';
         }
 
         return $description;

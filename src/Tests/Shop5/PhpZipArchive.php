@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpModuleTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpZipArchive
@@ -13,10 +12,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpZipArchive extends PhpModuleTest
 {
-    protected string $name          = 'ziparchive';
-    protected $requiredState = 'enabled';
-    protected $description   = 'Zum Erstellen von diversen Exporten wird die PHP-Klasse "ZipArchive" benötigt.';
-    protected bool $isOptional    = false;
+    protected string $name = 'ziparchive';
+
+    protected string $requiredState = 'enabled';
+
+    protected string $description = 'Zum Erstellen von diversen Exporten wird die PHP-Klasse "ZipArchive" benötigt.';
+
     protected bool $isRecommended = true;
 
     /**

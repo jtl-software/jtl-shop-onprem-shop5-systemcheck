@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Systemcheck\Tests\Shop5;
 
 use Systemcheck\Tests\PhpConfigTest;
-use Systemcheck\Tests\AbstractTest;
 
 /**
  * Class PhpUploadMaxFilesize
@@ -13,10 +12,12 @@ use Systemcheck\Tests\AbstractTest;
  */
 class PhpUploadMaxFilesize extends PhpConfigTest
 {
-    protected string $name          = 'upload_max_filesize';
-    protected $requiredState = '>= 6M';
-    protected $description   = '';
-    protected bool $isOptional    = true;
+    protected string $name = 'upload_max_filesize';
+
+    protected string $requiredState = '>= 6M';
+
+    protected bool $isOptional = true;
+
     protected bool $isRecommended = true;
 
     /**
@@ -25,6 +26,9 @@ class PhpUploadMaxFilesize extends PhpConfigTest
     public function execute(): bool
     {
         $uploadMaxFilesize  = \ini_get('upload_max_filesize');
+        if ($uploadMaxFilesize === false) {
+            return false;
+        }
         $this->currentState = $uploadMaxFilesize;
 
         return $this->shortHandToInt($uploadMaxFilesize) >= $this->shortHandToInt('6M');

@@ -15,9 +15,11 @@ use Systemcheck\Tests\ProgramTest;
  */
 class PhpDBConnection extends ProgramTest
 {
-    protected string $name          = 'Datenbank-Unterstützung';
-    protected $requiredState = 'MySQL, MariaDB';
-    protected $description   = 'Für JTL-Shop wird eine MySQL oder MariaDB Datenbank benötigt.';
+    protected string $name = 'Datenbank-Unterstützung';
+
+    protected string $requiredState = 'MySQL, MariaDB';
+
+    protected string $description = 'Für JTL-Shop wird eine MySQL oder MariaDB Datenbank benötigt.';
 
     /** @var bool */
     private bool $requireAuth = false;
@@ -77,12 +79,14 @@ class PhpDBConnection extends ProgramTest
                 return $this->handleAuthenticated($pdoDB);
             }
             if ((int)($_POST['dbAuth'] ?? 0) === 1) {
-                $pdoDB = $pdoCon->getConnection(PDOConnection::createAuth(
-                    $_POST['dbHost'] ?? '',
-                    $_POST['dbSocket'] ?? '',
-                    $_POST['dbUser'] ?? '',
-                    $_POST['dbPassword'] ?? ''
-                ));
+                $pdoDB = $pdoCon->getConnection(
+                    PDOConnection::createAuth(
+                        $_POST['dbHost'] ?? '',
+                        $_POST['dbSocket'] ?? '',
+                        $_POST['dbUser'] ?? '',
+                        $_POST['dbPassword'] ?? ''
+                    )
+                );
 
                 return $this->handleAuthenticated($pdoDB);
             }
@@ -96,7 +100,7 @@ class PhpDBConnection extends ProgramTest
     /**
      * @inheritdoc
      */
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         $default = parent::getDescription();
         if ($this->requireAuth) {

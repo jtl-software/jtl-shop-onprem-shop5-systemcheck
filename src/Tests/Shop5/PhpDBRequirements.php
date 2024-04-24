@@ -13,9 +13,11 @@ use Systemcheck\Tests\DBConnectionTest;
  */
 class PhpDBRequirements extends DBConnectionTest
 {
-    protected string $name          = 'Datenbank-Voraussetzungen';
-    protected $requiredState = 'InnoDB, UTF-8';
-    protected $description   = 'Für JTL-Shop ist Datenbankunterstützung für InnoDB und UTF-8 erforderlich.';
+    protected string $name = 'Datenbank-Voraussetzungen';
+
+    protected string $requiredState = 'InnoDB, UTF-8';
+
+    protected string $description = 'Für JTL-Shop ist Datenbankunterstützung für InnoDB und UTF-8 erforderlich.';
 
     /**
      * @inheritdoc
