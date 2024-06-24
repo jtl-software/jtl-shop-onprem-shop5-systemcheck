@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Smarty\Smarty;
+use Smarty\Template;
 use Systemcheck\Environment;
 use Systemcheck\Platform\Hosting;
 
@@ -10,13 +12,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 /**
- * @param array                    $params
- * @param Smarty_Internal_Template $smarty
+ * @param array    $params
+ * @param Template $template
  * @return string
  */
-function getResults(array $params, $smarty): string
+function getResults(array $params, Template $template): string
 {
-    return $smarty->assign('test', $params['test'])->fetch('testResult.tpl');
+    return $template->getSmarty()->assign('test', $params['test'])->fetch('testResult.tpl');
 }
 
 $templatePath = __DIR__ . '/templates';
