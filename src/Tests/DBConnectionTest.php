@@ -14,27 +14,15 @@ use Systemcheck\Tests\Shop5\PhpDBConnection;
  */
 abstract class DBConnectionTest extends ProgramTest
 {
-    /**
-     * @var PDO|null
-     */
     private ?PDO $pdoDB = null;
 
-    /**
-     * @var bool
-     */
     protected bool $isRecommended = true;
 
-    /**
-     * @return PDO|null
-     */
     protected function getPdoDB(): ?PDO
     {
         return $this->pdoDB ?? ($this->pdoDB = PDOConnection::getInstance()->getConnection());
     }
 
-    /**
-     * @return bool
-     */
     protected function handleNotSupported(): bool
     {
         $this->isOptional    = true;
@@ -44,14 +32,8 @@ abstract class DBConnectionTest extends ProgramTest
         return false;
     }
 
-    /**
-     * @return bool
-     */
     abstract protected function handleDBAvailable(): bool;
 
-    /**
-     * @inheritDoc
-     */
     public function execute(): bool
     {
         $dbTest = new PhpDBConnection();

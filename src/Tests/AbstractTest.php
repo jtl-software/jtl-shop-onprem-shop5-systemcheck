@@ -18,85 +18,45 @@ abstract class AbstractTest implements JsonSerializable
 
     public const RESULT_UNKNOWN = 2;
 
-    /**
-     * @var string
-     */
     protected string $name;
 
-    /**
-     * @var string
-     */
     protected string $currentState = '';
 
-    /**
-     * @var int
-     */
     protected int $result = self::RESULT_FAILED;
 
-    /**
-     * @var string
-     */
     protected string $requiredState;
 
-    /**
-     * @var string
-     */
     protected string $description = '';
 
-    /**
-     * @var bool
-     */
     protected bool $isRecommended = false;
 
-    /**
-     * @var bool
-     */
     protected bool $isOptional = false;
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getRequiredState(): string
     {
         return $this->requiredState;
     }
 
-    /**
-     * @return string
-     */
     public function getCurrentState(): string
     {
         return $this->currentState;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsOptional(): bool
     {
         return $this->isOptional;
     }
 
-    /**
-     * getIsRecommended
-     * @return bool
-     */
     public function getIsRecommended(): bool
     {
         return $this->isRecommended;
@@ -112,9 +72,6 @@ abstract class AbstractTest implements JsonSerializable
             : false;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getRunStandAlone(): ?bool
     {
         return \property_exists($this, 'runStandAlone')
@@ -130,16 +87,13 @@ abstract class AbstractTest implements JsonSerializable
         return $this->result;
     }
 
-    /**
-     * @param bool $result
-     */
     public function setResult(bool $result): void
     {
         $this->result = $result === true ? self::RESULT_OK : self::RESULT_FAILED;
     }
 
     /**
-     * @return bool
+     * @return bool - true if the test was successful, false otherwise
      */
     abstract public function execute(): bool;
 

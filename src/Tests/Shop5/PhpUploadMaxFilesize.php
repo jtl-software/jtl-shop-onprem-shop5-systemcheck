@@ -25,7 +25,7 @@ class PhpUploadMaxFilesize extends PhpConfigTest
      */
     public function execute(): bool
     {
-        $uploadMaxFilesize  = \ini_get('upload_max_filesize');
+        $uploadMaxFilesize = \ini_get('upload_max_filesize');
         if ($uploadMaxFilesize === false) {
             return false;
         }

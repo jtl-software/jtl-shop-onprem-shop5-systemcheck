@@ -16,14 +16,8 @@ use Systemcheck\Tests\ProgramTest;
  */
 class Environment
 {
-    /**
-     * @var bool
-     */
     protected bool $passed = false;
 
-    /**
-     * @return bool
-     */
     public function getIsPassed(): bool
     {
         return $this->passed;
