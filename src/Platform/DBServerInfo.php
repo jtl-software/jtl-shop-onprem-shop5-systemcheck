@@ -35,65 +35,32 @@ final class DBServerInfo
         self::SERVER_MARIADB => '10.12.0'
     ];
 
-    /**
-     * @var PDO
-     */
     private PDO $pdoDb;
 
-    /**
-     * @var string|null
-     */
     private ?string $serverInfo = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $serverVersion = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $server = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $innoDBSupport = null;
 
-    /** @var bool|null */
     private ?bool $utf8Support = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $innoDBSize = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $sqlMode = null;
 
-    /**
-     * DBServerInfo constructor
-     * @param PDO $pdoDb
-     */
     public function __construct(PDO $pdoDb)
     {
         $this->pdoDb = $pdoDb;
     }
 
-    /**
-     * @return string
-     */
     private function getServerInfo(): string
     {
         return $this->serverInfo ?? ($this->serverInfo = $this->pdoDb->getAttribute(PDO::ATTR_SERVER_VERSION));
     }
 
-    /**
-     * @param string $info
-     * @return string
-     */
     private function splitServerInfo(string $info = 'server'): string
     {
         $serverInfo = $this->getServerInfo();
@@ -110,33 +77,21 @@ final class DBServerInfo
         return $info === 'server' ? $this->server : $this->serverVersion;
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->serverVersion ?? $this->splitServerInfo('version');
     }
 
-    /**
-     * @return string
-     */
     public function getServer(): string
     {
         return $this->server ?? $this->splitServerInfo();
     }
 
-    /**
-     * @return bool
-     */
     public function isSupportedServer(): bool
     {
         return \in_array($this->getServer(), [self::SERVER_MYSQL, self::SERVER_MARIADB]);
     }
 
-    /**
-     * @return int
-     */
     public function isSupportedVersion(): int
     {
         $version    = $this->getVersion();
@@ -162,9 +117,6 @@ final class DBServerInfo
         return self::NOT_SUPPORTED;
     }
 
-    /**
-     * @return bool
-     */
     public function hasInnoDBSupport(): bool
     {
         if ($this->innoDBSupport !== null) {
@@ -201,9 +153,6 @@ final class DBServerInfo
         return $this->innoDBSupport;
     }
 
-    /**
-     * @return bool
-     */
     public function hasUTF8Support(): bool
     {
         if ($this->utf8Support !== null) {
@@ -228,36 +177,21 @@ final class DBServerInfo
         return $this->utf8Support;
     }
 
-    /**
-     * @param string|null $server
-     * @return string
-     */
     public function getMinSupportedVersion(?string $server = null): string
     {
         return self::MIN_VERSION[$server ?? $this->getServer()] ?? '';
     }
 
-    /**
-     * @param string|null $server
-     * @return string
-     */
     public function getRecommendedVersion(?string $server = null): string
     {
         return self::MIN_RECOMMENDED_VERSION[$server ?? $this->getServer()] ?? '';
     }
 
-    /**
-     * @param string|null $server
-     * @return string|null
-     */
     public function getMaxSupportedVersion(?string $server = null): ?string
     {
         return self::MAX_VERSION[$server ?? $this->getServer()] ?? null;
     }
 
-    /**
-     * @return int
-     */
     public function getInnoDBSize(): int
     {
         if ($this->innoDBSize !== null) {
@@ -294,9 +228,6 @@ final class DBServerInfo
         return $this->innoDBSize;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSQLMode(): ?string
     {
         if ($this->sqlMode !== null) {

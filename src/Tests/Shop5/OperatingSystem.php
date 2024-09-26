@@ -26,7 +26,7 @@ class OperatingSystem extends ProgramTest
     /**
      * @var array<string, string>
      */
-    private array $unameMap = [
+    private static array $UNAME_MAP = [
         'CYGWIN_NT-5.1' => 'Windows',
         'Darwin'        => 'Mac OS X',
         'IRIX64'        => 'IRIX',
@@ -38,7 +38,7 @@ class OperatingSystem extends ProgramTest
     /**
      * @var array<string, string>
      */
-    private array $archMap = [
+    private static array $ARCH_MAP = [
         'i386'   => 'Intel x86',
         'i486'   => 'Intel x86',
         'i586'   => 'Intel x86',
@@ -54,14 +54,13 @@ class OperatingSystem extends ProgramTest
     {
         // Operating system
         $os = \php_uname('s');
-        if (\array_key_exists($os, $this->unameMap)) {
-            $os = $this->unameMap[$os];
+        if (\array_key_exists($os, self::$UNAME_MAP)) {
+            $os = self::$UNAME_MAP[$os];
         }
-
         // Processor architecture
         $arch = \php_uname('m');
-        if (\array_key_exists($arch, $this->archMap)) {
-            $arch = $this->archMap[$arch];
+        if (\array_key_exists($arch, self::$ARCH_MAP)) {
+            $arch = self::$ARCH_MAP[$arch];
         }
 
         $this->currentState = \sprintf('%s (%s)', $os, $arch);

@@ -14,8 +14,6 @@ class Filesystem
 {
     /**
      * root path of this shop - optional
-     *
-     * @var string
      */
     protected string $rootPath = '';
 
@@ -35,8 +33,6 @@ class Filesystem
 
     /**
      * result of the folder-check
-     *
-     * @var bool
      */
     protected bool $passed = true;
 
@@ -107,9 +103,6 @@ class Filesystem
         'plugins'
     ];
 
-    /**
-     * @param string $rootPath root-path of this shop-application
-     */
     public function __construct(string $rootPath)
     {
         $this->rootPath    = $rootPath;
@@ -176,9 +169,6 @@ class Filesystem
         return $folders;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsPassed(): bool
     {
         $checkedFolders = $this->getFoldersChecked();

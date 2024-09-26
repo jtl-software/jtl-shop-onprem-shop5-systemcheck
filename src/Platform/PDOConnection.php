@@ -14,37 +14,21 @@ use stdClass;
  */
 final class PDOConnection
 {
-    /**
-     * @var PDO|null
-     */
     private ?PDO $dbPDO = null;
 
-    /**
-     * @var PDOConnection|null
-     */
     private static ?self $instance = null;
 
-    /**
-     * PDOConnection constructor
-     */
     private function __construct()
     {
         self::$instance = $this;
     }
 
-    /**
-     * @return self
-     */
     public static function getInstance(): self
     {
         return self::$instance ?? new self();
     }
 
     /**
-     * @param string $host
-     * @param string $socket
-     * @param string $user
-     * @param string $pwd
      * @return stdClass&object{dbHost: string, dbSocket: string, dbUser: string, dbPwd: string}
      */
     public static function createAuth(string $host, string $socket, string $user, string $pwd): stdClass
@@ -57,10 +41,6 @@ final class PDOConnection
         ];
     }
 
-    /**
-     * @param stdClass $auth
-     * @return PDO|null
-     */
     private function createConnection(stdClass $auth): ?PDO
     {
         $dsn = 'mysql:';
@@ -79,19 +59,11 @@ final class PDOConnection
         return $this->dbPDO;
     }
 
-    /**
-     * @param stdClass|null $auth
-     * @return PDO|null
-     */
     public function getConnection(?stdClass $auth = null): ?PDO
     {
         return $this->dbPDO ?? ($auth === null ? null : $this->createConnection($auth));
     }
 
-    /**
-     * @param PDO $dbPDO
-     * @return $this
-     */
     public function setConnection(PDO $dbPDO): self
     {
         $this->dbPDO = $dbPDO;

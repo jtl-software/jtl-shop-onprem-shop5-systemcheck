@@ -22,57 +22,33 @@ class Hosting
 
     public const PROVIDER_HETZNER = 'hetzner';
 
-    /**
-     * @var string|null
-     */
     protected ?string $hostname = null;
 
-    /**
-     * @var string
-     */
     protected string $documentRoot;
 
-    /**
-     * @var string|null
-     */
     protected ?string $provider = null;
 
-    /**
-     * Hosting constructor.
-     */
     public function __construct()
     {
         $this->documentRoot = $_SERVER['DOCUMENT_ROOT'] ?? '?';
         $this->detect();
     }
 
-    /**
-     * @return string|null
-     */
     public function getHostname(): ?string
     {
         return $this->hostname;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDocumentRoot(): ?string
     {
         return $this->documentRoot;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProvider(): ?string
     {
         return $this->provider;
     }
 
-    /**
-     * @return string
-     */
     public function getPhpVersion(): string
     {
         return \PHP_VERSION;
