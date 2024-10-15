@@ -1,7 +1,7 @@
 {
   "name": "jtlshop/shop5-systemcheck",
   "description": "Shop5 Systemcheck",
-  "version": "5.2.0",
+  "version": "5.5.1",
   "keywords": [
     "jtl",
     "jtl-shop"
@@ -19,7 +19,7 @@
   "require": {
     "php": ">=8.1",
     "ext-pdo": "*",
-    "smarty/smarty": "5.3.*"
+    "smarty/smarty": "5.4.*"
   },
   "autoload": {
     "psr-4": {
