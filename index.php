@@ -26,8 +26,6 @@ $smarty       = new Smarty();
 $systemcheck  = new Environment();
 $tests        = $systemcheck->executeTestGroup('Shop5');
 $platform     = new Hosting();
-
-header('Content-Type: text/html; charset=utf-8');
 try {
     $smarty->assign('passed', $systemcheck->getIsPassed())
         ->assign('tests', $tests)

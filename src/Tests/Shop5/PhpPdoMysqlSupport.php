@@ -16,8 +16,8 @@ class PhpPdoMysqlSupport extends PhpModuleTest
 
     protected string $requiredState = 'enabled';
 
-    protected string $description = 'Für JTL-Shop wird die Unterstützung für PHP-Data-Objects ' .
-    '(<code>php-pdo</code> und <code>php-mysql</code>) benötigt.';
+    protected string $description = 'Für JTL-Shop wird die Unterstützung für PHP-Data-Objects '
+    . '(<code>php-pdo</code> und <code>php-mysql</code>) benötigt.';
 
     /**
      * @inheritdoc

@@ -17,9 +17,6 @@ class PhpDBVersion extends DBConnectionTest
 
     protected string $requiredState = '';
 
-    /**
-     * @inheritdoc
-     */
     protected function handleDBAvailable(): bool
     {
         $pdoDB = $this->getPdoDB();

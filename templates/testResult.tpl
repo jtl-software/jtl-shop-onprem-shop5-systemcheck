@@ -1,51 +1,51 @@
 {$result = $test->getResult()}
 {if $result === 0}
-    <span class="hidden-xs">
+    <span class="d-none d-sm-block">
         <button type="button" class="btn btn-test-result btn-success btn-xs">
-            <i class="glyphicon glyphicon-ok"></i>
+            <i class="fa-solid fa-check"></i>
         </button>
-        {$test->getCurrentState()}
+        <p>{$test->getCurrentState()}</p>
     </span>
-    <span class="visible-xs">
+    <span class="d-block d-sm-none">
         <button type="button" class="btn btn-test-result btn-success btn-xs">
-            <i class="glyphicon glyphicon-ok"></i>
+            <i class="fa-solid fa-check"></i>
         </button>
     </span>
 {elseif $result === 1}
     {if $test->getIsOptional()}
-        <span class="hidden-xs">
+        <span class="d-none d-sm-block">
             {if $test->getIsRecommended()}
                 <button type="button" class="btn btn-test-result btn-warning btn-xs">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                 </button>
             {else}
                 <button type="button" class="btn btn-test-result btn-primary btn-xs">
-                    <i class="glyphicon glyphicon-remove"></i>
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             {/if}
-            {$test->getCurrentState()}
+            <p>{$test->getCurrentState()}</p>
         </span>
-        <span class="visible-xs">
+        <span class="d-block d-sm-none">
             {if $test->getIsRecommended()}
                 <button type="button" class="btn btn-test-result btn-warning btn-xs">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                 </button>
             {else}
                 <button type="button" class="btn btn-test-result btn-primary btn-xs">
-                    <i class="glyphicon glyphicon-remove"></i>
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             {/if}
         </span>
     {else}
-        <span class="hidden-xs">
+        <span class="d-none d-sm-block">
             <button type="button" class="btn btn-test-result btn-danger btn-xs">
-                <i class="glyphicon glyphicon-remove"></i>
+                <i class="fa-solid fa-xmark"></i>
             </button>
-            {$test->getCurrentState()}
+            <p>{$test->getCurrentState()}</p>
         </span>
-        <span class="visible-xs">
+        <span class="d-block d-sm-none">
             <button type="button" class="btn btn-test-result btn-danger btn-xs">
-                <i class="glyphicon glyphicon-remove"></i>
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </span>
     {/if}

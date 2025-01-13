@@ -9,7 +9,7 @@ use PDO;
 
 /**
  * Class DBServerInfo
- * @package JTL\DB
+ * @package Systemcheck\Platform
  */
 final class DBServerInfo
 {
@@ -130,24 +130,24 @@ final class DBServerInfo
                     WHERE `ENGINE` = 'InnoDB'"
             );
             if ($res->execute() === false || !($support = $res->fetchObject())) {
-                return false;
+                throw new Exception('InnoDB support could not be determined');
             }
 
             $this->innoDBSupport = \in_array($support->SUPPORT ?? 'NONE', ['YES', 'DEFAULT'], true);
             if ($this->innoDBSupport === false || $this->getServer() !== self::SERVER_MYSQL) {
-                return $this->innoDBSupport;
+                throw new Exception('InnoDB not supported');
             }
 
             $this->innoDBSupport = null;
 
             $res = $this->pdoDb->prepare("SHOW VARIABLES LIKE 'innodb_version'");
             if ($res->execute() === false || !($version = $res->fetchObject())) {
-                return false;
+                throw new Exception('InnoDB support could not be determined');
             }
 
             $this->innoDBSupport = \version_compare($version->Value, '5.6.0', '>=');
         } catch (Exception) {
-            return false;
+            $this->innoDBSupport = false;
         }
 
         return $this->innoDBSupport;
