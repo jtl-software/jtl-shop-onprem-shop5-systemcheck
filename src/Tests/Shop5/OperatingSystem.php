@@ -16,8 +16,8 @@ class OperatingSystem extends ProgramTest
 
     protected string $requiredState = 'Linux';
 
-    protected string $description = 'JTL-Software empfiehlt den Betrieb mit Linux-Webservern. ' .
-    'Der Betrieb unter Solaris, FreeBSD oder Windows wird weder empfohlen noch unterstützt.';
+    protected string $description = 'JTL-Software empfiehlt den Betrieb mit Linux-Webservern. '
+    . 'Der Betrieb unter Solaris, FreeBSD oder Windows wird weder empfohlen noch unterstützt.';
 
     protected bool $isOptional = true;
 

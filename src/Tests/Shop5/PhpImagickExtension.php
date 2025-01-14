@@ -16,9 +16,8 @@ class PhpImagickExtension extends PhpModuleTest
 
     protected string $requiredState = 'enabled';
 
-    protected string $description = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-imagick</code> 
-für die dynamische Generierung von Bildern.<br>Diese Erweiterung ist auf Debian-Systemen als 
-<code>php5-imagick,</code> sowie auf Fedora/RedHat-Systemen als <code>php-pecl-imagick</code> verfügbar.';
+    protected string $description = 'JTL-Shop benötigt die PHP-Erweiterung <code>php-imagick</code>'
+    . ' für die dynamische Generierung von Bildern.';
 
     protected bool $isOptional = true;
 
