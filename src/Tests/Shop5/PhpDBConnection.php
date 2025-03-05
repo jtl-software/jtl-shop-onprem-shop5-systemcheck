@@ -72,29 +72,40 @@ class PhpDBConnection extends ProgramTest
     public function execute(): bool
     {
         $pdoTest = new PhpPdoMysqlSupport();
-        if ($pdoTest->execute()) {
-            $pdoCon = PDOConnection::getInstance();
-            $pdoDB  = $pdoCon->getConnection();
-            if ($pdoDB !== null) {
-                return $this->handleAuthenticated($pdoDB);
-            }
-            if ((int)($_POST['dbAuth'] ?? 0) === 1) {
-                $pdoDB = $pdoCon->getConnection(
-                    PDOConnection::createAuth(
-                        $_POST['dbHost'] ?? '',
-                        $_POST['dbSocket'] ?? '',
-                        $_POST['dbUser'] ?? '',
-                        $_POST['dbPassword'] ?? ''
-                    )
-                );
+        if (!$pdoTest->execute()) {
+            return $this->handleNotSupported();
+        }
+        $pdoCon = PDOConnection::getInstance();
+        $pdoDB  = $pdoCon->getConnection();
+        if ($pdoDB !== null) {
+            return $this->handleAuthenticated($pdoDB);
+        }
+        if ((int)($_POST['dbAuth'] ?? 0) === 1) {
+            $pdoDB = $pdoCon->getConnection(
+                PDOConnection::createAuth(
+                    $_POST['dbHost'] ?? '',
+                    $_POST['dbSocket'] ?? '',
+                    $_POST['dbUser'] ?? '',
+                    $_POST['dbPassword'] ?? ''
+                )
+            );
 
-                return $this->handleAuthenticated($pdoDB);
-            }
+            return $this->handleAuthenticated($pdoDB);
+        }
+        if (\defined('DB_USER') && \defined('DB_PASS') && \defined('DB_HOST')) {
+            $pdoDB = $pdoCon->getConnection(
+                PDOConnection::createAuth(
+                    \DB_HOST,
+                    \defined('DB_SOCKET') ? \DB_SOCKET : '',
+                    \DB_USER,
+                    \DB_PASS
+                )
+            );
 
-            return $this->handleNotAuthenticated();
+            return $this->handleAuthenticated($pdoDB);
         }
 
-        return $this->handleNotSupported();
+        return $this->handleNotAuthenticated();
     }
 
     /**
