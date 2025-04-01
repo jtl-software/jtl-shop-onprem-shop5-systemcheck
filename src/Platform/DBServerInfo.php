@@ -241,6 +241,7 @@ final class DBServerInfo
         if ($res->execute() === false || !($sqlMode = $res->fetchObject())) {
             return null;
         }
+        $this->sqlMode = $sqlMode->Value;
 
         return $sqlMode->Value;
     }
