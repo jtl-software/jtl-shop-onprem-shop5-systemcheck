@@ -134,7 +134,11 @@ final class DBServerInfo
             }
 
             $this->innoDBSupport = \in_array($support->SUPPORT ?? 'NONE', ['YES', 'DEFAULT'], true);
-            if ($this->innoDBSupport === false || $this->getServer() !== self::SERVER_MYSQL) {
+            $server              = $this->getServer();
+            if ($server === self::SERVER_MARIADB) {
+                return $this->innoDBSupport;
+            }
+            if ($this->innoDBSupport === false || $server !== self::SERVER_MYSQL) {
                 throw new Exception('InnoDB not supported');
             }
 
