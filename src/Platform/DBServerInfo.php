@@ -134,21 +134,13 @@ final class DBServerInfo
             }
 
             $this->innoDBSupport = \in_array($support->SUPPORT ?? 'NONE', ['YES', 'DEFAULT'], true);
-            $server              = $this->getServer();
-            if ($server === self::SERVER_MARIADB) {
+            if ($this->innoDBSupport === false || $this->getServer() !== self::SERVER_MYSQL) {
                 return $this->innoDBSupport;
             }
-            if ($this->innoDBSupport === false || $server !== self::SERVER_MYSQL) {
-                throw new Exception('InnoDB not supported');
-            }
-
-            $this->innoDBSupport = null;
-
             $res = $this->pdoDb->prepare("SHOW VARIABLES LIKE 'innodb_version'");
             if ($res->execute() === false || !($version = $res->fetchObject())) {
                 throw new Exception('InnoDB support could not be determined');
             }
-
             $this->innoDBSupport = \version_compare($version->Value, '5.6.0', '>=');
         } catch (Exception) {
             $this->innoDBSupport = false;
