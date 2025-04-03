@@ -32,6 +32,9 @@ abstract class DBConnectionTest extends ProgramTest
         return false;
     }
 
+    /**
+     * @return bool
+     */
     abstract protected function handleDBAvailable(): bool;
 
     public function execute(): bool

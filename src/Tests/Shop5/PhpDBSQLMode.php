@@ -38,6 +38,9 @@ class PhpDBSQLMode extends DBConnectionTest
 
         $version = new DBServerInfo($pdoDB);
         $sqlMode = $version->getSQLMode();
+        if ($sqlMode === null) {
+            return $this->handleNotSupported();
+        }
         if (\stripos($sqlMode, 'strict') !== false || \stripos($sqlMode, 'only_full_group_by') !== false) {
             $this->currentState = 'strict on';
             $this->isOptional   = false;
