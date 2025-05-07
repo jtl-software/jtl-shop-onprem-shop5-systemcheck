@@ -19,7 +19,7 @@
   "require": {
     "php": ">=8.0",
     "ext-pdo": "*",
-    "smarty/smarty": "4.5.*|5.4.*"
+    "smarty/smarty": "4.5.*|5.5.*"
   },
   "autoload": {
     "psr-4": {
