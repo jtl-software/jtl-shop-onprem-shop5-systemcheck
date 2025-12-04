@@ -32,7 +32,7 @@ final class DBServerInfo
     ];
     private const MAX_VERSION             = [
         self::SERVER_MYSQL   => null,
-        self::SERVER_MARIADB => '10.12.0'
+        self::SERVER_MARIADB => '12.0.2'
     ];
 
     private PDO $pdoDb;
