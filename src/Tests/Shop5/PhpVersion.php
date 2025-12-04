@@ -14,7 +14,7 @@ class PhpVersion extends ProgramTest
 {
     protected string $name = 'PHP-Version';
 
-    protected string $requiredState = '>8.2.0';
+    protected string $requiredState = '>8.3.0';
 
     /**
      * @inheritdoc
@@ -23,6 +23,6 @@ class PhpVersion extends ProgramTest
     {
         $this->currentState = \PHP_VERSION;
 
-        return \version_compare($this->currentState, '8.2.0', '>=');
+        return \version_compare($this->currentState, '8.3.0', '>=');
     }
 }
