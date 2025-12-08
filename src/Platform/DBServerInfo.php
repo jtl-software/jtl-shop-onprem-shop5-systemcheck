@@ -23,12 +23,12 @@ final class DBServerInfo
     public const MAX_SUPPORTED = 3;
 
     private const MIN_VERSION             = [
-        self::SERVER_MYSQL   => '5.7.0',
-        self::SERVER_MARIADB => '10.1.0'
+        self::SERVER_MYSQL   => '8.0.0',
+        self::SERVER_MARIADB => '10.6.0'
     ];
     private const MIN_RECOMMENDED_VERSION = [
-        self::SERVER_MYSQL   => '8.0.0',
-        self::SERVER_MARIADB => '10.5.0'
+        self::SERVER_MYSQL   => '8.4.0',
+        self::SERVER_MARIADB => '10.11.0'
     ];
     private const MAX_VERSION             = [
         self::SERVER_MYSQL   => null,
