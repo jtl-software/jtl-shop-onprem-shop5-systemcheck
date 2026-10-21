@@ -1,0 +1,169 @@
+# Tool release (shop5-systemcheck): tag v* -> build zip -> GitHub Release -> signed notify to the build server.
+#
+# Replaces the GitLab build and deploy jobs. The zip has a top-level `systemcheck/` folder, like before.
+#
+# Settings:
+#   - Environment `build-server-deploy` (deployment tags: v*) holding secret DEPLOY_HMAC_SECRET.
+#     Only the `notify` job references it.
+#   - Optional repo variable BUILD_SERVER_URL (default https://api.jtl-shop.de), e.g. a staging receiver.
+#
+# The build server creates latest/<prefix>.zip itself; no `latest` asset is uploaded.
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions: {}
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PLUGIN_ZIP_PREFIX: shop5-systemcheck
+  TOOL_FOLDER_NAME: systemcheck
+  PAYLOAD_TYPE: tool
+  PLUGIN_PHP_VERSION: "8.1" # the GitLab build used the php81 image
+
+jobs:
+  build:
+    name: Build zip
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      prerelease: ${{ steps.meta.outputs.prerelease }}
+      zip: ${{ steps.zip.outputs.name }}
+    steps:
+      - name: Validate tag
+        id: meta
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          re='^v[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta|rc)(\.[0-9]+)?)?$'
+          [[ "$TAG" =~ $re ]] || { echo "::error::tag '$TAG' is not vX.Y.Z or vX.Y.Z-(alpha|beta|rc)[.N]"; exit 1; }
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if [[ -n "${BASH_REMATCH[1]}" ]]; then echo "prerelease=true" >> "$GITHUB_OUTPUT"; else echo "prerelease=false" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2.40.0
+        with:
+          php-version: ${{ env.PLUGIN_PHP_VERSION }}
+          tools: composer
+
+      - name: Install production dependencies
+        run: |
+          set -euo pipefail
+          if [[ -f composer.json ]]; then
+            composer install --no-progress --no-interaction --no-dev --optimize-autoloader
+          else
+            echo "No composer.json, skipping composer install"
+          fi
+
+      - name: Build zip
+        id: zip
+        env:
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          set -euo pipefail
+          name="$(.github/scripts/build-tool-zip.sh "$PLUGIN_ZIP_PREFIX" "$TAG" dist "$TOOL_FOLDER_NAME")"
+          jq -n --arg n "$name" '{assets: [{kind: "main", name: $n}]}' > dist/manifest.json
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  release:
+    name: GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # create the Release and upload assets; nothing else
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ needs.build.outputs.tag }}
+      ZIP: ${{ needs.build.outputs.zip }}
+      PRERELEASE: ${{ needs.build.outputs.prerelease }}
+    outputs:
+      release_id: ${{ steps.release.outputs.release_id }}
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: release-dist
+          path: dist
+
+      - name: Create (or update) release
+        id: release
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            # re-run of a failed workflow: replace the asset, keep the existing release
+            gh release upload "$TAG" "dist/${ZIP}" --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            flags=()
+            [[ "$PRERELEASE" == "true" ]] && flags+=(--prerelease)
+            gh release create "$TAG" "dist/${ZIP}" --repo "$GITHUB_REPOSITORY" \
+              --verify-tag --title "$TAG" --generate-notes "${flags[@]}"
+          fi
+          gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq .id > release_id.txt
+          mkdir -p meta
+          cp dist/manifest.json meta/manifest.json
+          gh api "repos/${GITHUB_REPOSITORY}/releases/$(cat release_id.txt)" \
+            --jq '[.assets[] | {name, url}]' > meta/release.json
+          echo "release_id=$(cat release_id.txt)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-meta
+          path: meta/
+          if-no-files-found: error
+          retention-days: 7
+
+  notify:
+    name: Notify build server
+    needs: [build, release]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: build-server-deploy # secret DEPLOY_HMAC_SECRET only reachable from v* tags
+    permissions:
+      contents: read # checkout of the notify scripts
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          sparse-checkout: .github/scripts
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: release-meta
+          path: meta
+
+      - name: Build payload
+        env:
+          TAG: ${{ needs.build.outputs.tag }}
+          RELEASE_ID: ${{ needs.release.outputs.release_id }}
+        run: |
+          set -euo pipefail
+          .github/scripts/build-payload.py --repo "$GITHUB_REPOSITORY" --ref "$TAG" --sha "$GITHUB_SHA" \
+            --type "$PAYLOAD_TYPE" --release-id "$RELEASE_ID" \
+            --manifest meta/manifest.json --release meta/release.json > body.json
+
+      - name: Notify
+        env:
+          DEPLOY_HMAC_SECRET: ${{ secrets.DEPLOY_HMAC_SECRET }}
+          BUILD_SERVER_URL: ${{ vars.BUILD_SERVER_URL || 'https://api.jtl-shop.de' }}
+        run: .github/scripts/notify-deploy.sh body.json
