@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.3",
     "ext-pdo": "*",
     "smarty/smarty": "4.5.*|^5.5"
   },
