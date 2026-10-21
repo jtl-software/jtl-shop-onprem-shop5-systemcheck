@@ -26,7 +26,7 @@ env:
   PLUGIN_ZIP_PREFIX: shop5-systemcheck
   TOOL_FOLDER_NAME: systemcheck
   PAYLOAD_TYPE: tool
-  PLUGIN_PHP_VERSION: "8.1" # the GitLab build used the php81 image
+  PLUGIN_PHP_VERSION: "8.3"
 
 jobs:
   build:
